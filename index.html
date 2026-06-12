@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Adeena Handloom</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,700&family=Jost:wght@200;300;400;500&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,700&family=Jost:wght@200;300;400;500&family=EB+Garamond:ital,wght@0,400;1,400&family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Quicksand:wght@300;400;500;600&family=Abril+Fatface&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -19,11 +19,9 @@ html{scroll-behavior:smooth}
 body{font-family:var(--ff-body);background:var(--cream);color:var(--ink);cursor:none;overflow-x:hidden}
 
 /* CUSTOM CURSOR */
-.cursor{position:fixed;width:8px;height:8px;background:var(--ink);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width .25s,height .25s,background .25s,opacity .25s}
-.cursor-ring{position:fixed;width:32px;height:32px;border:1px solid var(--gold);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:all .15s ease}
-.cursor.expand{width:6px;height:6px;background:var(--gold);opacity:.7}
-.cursor-ring.expand{width:48px;height:48px;border-color:var(--gold);border-width:2px}
-.cursor.click{transform:translate(-50%,-50%) scale(0.5)}
+.cursor{position:fixed;width:12px;height:12px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s,box-shadow .2s;box-shadow:0 0 8px rgba(184,137,90,.5),0 0 2px rgba(184,137,90,.8);mix-blend-mode:multiply}
+.cursor.expand{width:20px;height:20px;background:var(--rose,#D4687A);box-shadow:0 0 16px rgba(212,104,122,.5)}
+.cursor.clicking{transform:translate(-50%,-50%) scale(0.6);background:var(--ink)}
 
 /* LOADER */
 .loader{position:fixed;inset:0;background:var(--ink);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;transition:opacity .8s ease}
@@ -492,12 +490,121 @@ select.rf-input{cursor:pointer}
   .rf-box{padding:32px 24px}
   .rf-row2{grid-template-columns:1fr}
 }
+
+/* ===== THEMES ===== */
+[data-theme="rose"]{--rose:#D4687A;--rose-light:#F2C4CD;--rose-pale:#FDF0F2;--blush:#F7E3E8;--ivory:#FBF6F0;--gold:#C9A96E;--gold2:#d4a96a;--text-dark:#3A2630;--text-mid:#7A5560;--text-soft:#B09098;--ink:#1a0f0f;--ink2:#3d2020;--dust:#7a5c5c;--petal:#e8c5b8;--cream:#faf5f0}
+[data-theme="emerald"]{--rose:#2d6a4f;--rose-light:#b7e4c7;--rose-pale:#d8f3dc;--blush:#d8f3dc;--ivory:#f4faf6;--gold:#40916c;--gold2:#52b788;--text-dark:#1b4332;--text-mid:#40916c;--text-soft:#95d5b2;--ink:#081c15;--ink2:#1b4332;--dust:#52b788;--petal:#b7e4c7;--cream:#f4faf6}
+[data-theme="indigo"]{--rose:#4361ee;--rose-light:#bac8ff;--rose-pale:#edf2ff;--blush:#dbe4ff;--ivory:#f8f9ff;--gold:#7048e8;--gold2:#9775fa;--text-dark:#1c1a3e;--text-mid:#4361ee;--text-soft:#91a7ff;--ink:#0d0c1d;--ink2:#1c1a3e;--dust:#748ffc;--petal:#bac8ff;--cream:#f8f9ff}
+[data-theme="saffron"]{--rose:#e76f51;--rose-light:#f4a261;--rose-pale:#fdf0e8;--blush:#fde8d8;--ivory:#fdf8f3;--gold:#e9c46a;--gold2:#f4a261;--text-dark:#264653;--text-mid:#e76f51;--text-soft:#f4a261;--ink:#1a1209;--ink2:#264653;--dust:#a0522d;--petal:#fddcb5;--cream:#fdf8f3}
+[data-theme="onyx"]{--rose:#c9a96e;--rose-light:#e8d5b0;--rose-pale:#f5edd8;--blush:#ede0c8;--ivory:#f9f5ee;--gold:#c9a96e;--gold2:#d4b483;--text-dark:#1a1209;--text-mid:#4a3728;--text-soft:#8a7060;--ink:#0d0a06;--ink2:#1a1209;--dust:#6b5443;--petal:#d4b483;--cream:#f9f5ee}
+[data-theme="mauve"]{--rose:#9b5de5;--rose-light:#d0aaff;--rose-pale:#f3e8ff;--blush:#ece0fa;--ivory:#faf5ff;--gold:#f15bb5;--gold2:#ff99c8;--text-dark:#2d0045;--text-mid:#9b5de5;--text-soft:#c77dff;--ink:#1a0030;--ink2:#2d0045;--dust:#7b2d8b;--petal:#d0aaff;--cream:#faf5ff}
+
+/* Theme selector */
+.theme-bar{position:fixed;right:20px;bottom:80px;z-index:600;display:flex;flex-direction:column;gap:8px;align-items:center}
+.theme-toggle-btn{width:44px;height:44px;border-radius:50%;background:var(--cream);border:1px solid var(--petal);box-shadow:0 4px 16px rgba(0,0,0,.12);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.2rem;transition:transform .2s}
+.theme-toggle-btn:hover{transform:scale(1.1)}
+.theme-swatches{display:flex;flex-direction:column;gap:6px;align-items:center;background:var(--cream);border:1px solid var(--petal);border-radius:28px;padding:10px 8px;box-shadow:0 8px 32px rgba(0,0,0,.12);display:none}
+.theme-swatches.open{display:flex}
+.tswatch{width:28px;height:28px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:all .2s;position:relative}
+.tswatch.active{border-color:var(--ink);transform:scale(1.15)}
+.tswatch::after{content:attr(data-label);position:absolute;right:36px;top:50%;transform:translateY(-50%);background:var(--ink);color:var(--cream);font-size:.6rem;letter-spacing:.1em;padding:3px 10px;border-radius:20px;white-space:nowrap;opacity:0;transition:opacity .2s;pointer-events:none}
+.tswatch:hover::after{opacity:1}
+
+/* ===== FONT PRESETS ===== */
+[data-font="classic"]{--ff-display:'Playfair Display',serif;--ff-body:'Jost',sans-serif;--ff-italic:'EB Garamond',serif}
+[data-font="modern"]{--ff-display:'Poppins',sans-serif;--ff-body:'Inter',sans-serif;--ff-italic:'Poppins',sans-serif}
+[data-font="elegant"]{--ff-display:'Cormorant Garamond',serif;--ff-body:'Quicksand',sans-serif;--ff-italic:'Cormorant Garamond',serif}
+[data-font="bold"]{--ff-display:'Abril Fatface',serif;--ff-body:'Work Sans',sans-serif;--ff-italic:'Abril Fatface',serif}
+
+/* ===== SIZE PRESETS ===== */
+[data-size="compact"]{--sp:0.8}
+[data-size="normal"]{--sp:1}
+[data-size="spacious"]{--sp:1.25}
+[data-size="compact"] .hero-h1{font-size:4.2rem}
+[data-size="spacious"] .hero-h1{font-size:6.5rem}
+[data-size="compact"] .cat-h2,[data-size="compact"] .review-h2,[data-size="compact"] .cust-h2,[data-size="compact"] .fb-h2,[data-size="compact"] .ed-h2{font-size:2.4rem}
+[data-size="spacious"] .cat-h2,[data-size="spacious"] .review-h2,[data-size="spacious"] .cust-h2,[data-size="spacious"] .fb-h2,[data-size="spacious"] .ed-h2{font-size:3.8rem}
+[data-size="compact"] .hero-left,[data-size="compact"] .editorial,[data-size="compact"] .catalogue,[data-size="compact"] .review-section,[data-size="compact"] .customers,[data-size="compact"] .flipbook-section{padding:calc(60px*var(--sp)) calc(60px*var(--sp))}
+[data-size="spacious"] .hero-left,[data-size="spacious"] .editorial,[data-size="spacious"] .catalogue,[data-size="spacious"] .review-section,[data-size="spacious"] .customers,[data-size="spacious"] .flipbook-section{padding:calc(100px*var(--sp)) calc(100px*var(--sp))}
+[data-size="compact"] .pcard-name{font-size:1.1rem}
+[data-size="spacious"] .pcard-name{font-size:1.5rem}
+[data-size="compact"] body{font-size:.92rem}
+[data-size="spacious"] body{font-size:1.08rem}
+
+/* ===== THEME PANEL — extended ===== */
+.theme-panel-box{display:none;flex-direction:column;gap:14px;background:var(--cream);border:1px solid var(--petal);border-radius:16px;padding:18px;box-shadow:0 8px 32px rgba(0,0,0,.15);width:220px}
+.theme-panel-box.open{display:flex}
+.theme-panel-section{display:flex;flex-direction:column;gap:8px}
+.theme-panel-label{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--dust)}
+.theme-swatches-row{display:flex;gap:8px;flex-wrap:wrap}
+.theme-opt-row{display:flex;gap:6px;flex-wrap:wrap}
+.theme-opt-btn{font-size:.65rem;padding:6px 12px;border:1px solid var(--petal);background:none;color:var(--dust);border-radius:20px;cursor:pointer;transition:all .2s;font-family:var(--ff-body)}
+.theme-opt-btn.active,.theme-opt-btn:hover{background:var(--gold);color:white;border-color:var(--gold)}
+
+/* ===== BROKEN IMAGE FIX ===== */
+.img-broken-wrap{position:relative}
+.img-fix-btn{position:absolute;top:8px;right:8px;background:rgba(26,15,15,.85);color:white;border:none;padding:5px 12px;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;border-radius:20px;cursor:pointer;z-index:10;display:none}
+.admin-mode .img-fix-btn{display:block}
+.img-fix-overlay{position:fixed;inset:0;background:rgba(26,15,15,.85);z-index:1300;display:none;align-items:center;justify-content:center;padding:20px}
+.img-fix-overlay.open{display:flex}
+.img-fix-box{background:var(--cream);padding:32px;max-width:440px;width:100%;border-top:3px solid var(--gold)}
+.img-fix-box h3{font-family:var(--ff-display);font-size:1.4rem;margin-bottom:16px}
+
+/* ===== DRAG-DROP EDIT MODE ===== */
+.edit-mode-bar{position:fixed;top:80px;left:50%;transform:translateX(-50%);z-index:700;background:var(--ink);color:var(--cream);padding:10px 24px;border-radius:30px;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;display:none;align-items:center;gap:16px;box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.edit-mode-bar.active{display:flex}
+.edit-mode-bar button{background:var(--gold);color:white;border:none;padding:6px 16px;border-radius:20px;font-size:.65rem;font-family:var(--ff-body);cursor:pointer;letter-spacing:.1em}
+.edit-mode-bar button.reset{background:#c0392b}
+.draggable-el{transition:none}
+.edit-active .draggable-el{outline:1px dashed rgba(184,137,90,.5);cursor:move;position:relative}
+.edit-active .draggable-el:hover{outline:2px dashed var(--gold)}
+.edit-active .draggable-el.dragging{opacity:.7;z-index:999;outline:2px solid var(--gold)}
 </style>
 </head>
 <body>
 
 <div class="cursor" id="cur"></div>
-<div class="cursor-ring" id="curRing"></div>
+
+<div class="theme-bar" id="themeBar">
+  <div class="theme-panel-box" id="themeSwatches">
+    <div class="theme-panel-section">
+      <div class="theme-panel-label">Color Theme</div>
+      <div class="theme-swatches-row">
+        <div class="tswatch active" data-theme="rose" data-label="Rose" style="background:linear-gradient(135deg,#D4687A,#C9A96E)" onclick="applyTheme('rose',this)"></div>
+        <div class="tswatch" data-theme="emerald" data-label="Emerald" style="background:linear-gradient(135deg,#2d6a4f,#52b788)" onclick="applyTheme('emerald',this)"></div>
+        <div class="tswatch" data-theme="indigo" data-label="Indigo" style="background:linear-gradient(135deg,#4361ee,#7048e8)" onclick="applyTheme('indigo',this)"></div>
+        <div class="tswatch" data-theme="saffron" data-label="Saffron" style="background:linear-gradient(135deg,#e76f51,#e9c46a)" onclick="applyTheme('saffron',this)"></div>
+        <div class="tswatch" data-theme="onyx" data-label="Onyx" style="background:linear-gradient(135deg,#1a1209,#c9a96e)" onclick="applyTheme('onyx',this)"></div>
+        <div class="tswatch" data-theme="mauve" data-label="Mauve" style="background:linear-gradient(135deg,#9b5de5,#f15bb5)" onclick="applyTheme('mauve',this)"></div>
+      </div>
+    </div>
+    <div class="theme-panel-section">
+      <div class="theme-panel-label">Font Style</div>
+      <div class="theme-opt-row" id="fontOptRow">
+        <button class="theme-opt-btn active" data-font="classic" onclick="applyFont('classic',this)">Classic</button>
+        <button class="theme-opt-btn" data-font="modern" onclick="applyFont('modern',this)">Modern</button>
+        <button class="theme-opt-btn" data-font="elegant" onclick="applyFont('elegant',this)">Elegant</button>
+        <button class="theme-opt-btn" data-font="bold" onclick="applyFont('bold',this)">Bold</button>
+      </div>
+    </div>
+    <div class="theme-panel-section">
+      <div class="theme-panel-label">Spacing & Size</div>
+      <div class="theme-opt-row" id="sizeOptRow">
+        <button class="theme-opt-btn" data-size="compact" onclick="applySize('compact',this)">Compact</button>
+        <button class="theme-opt-btn active" data-size="normal" onclick="applySize('normal',this)">Normal</button>
+        <button class="theme-opt-btn" data-size="spacious" onclick="applySize('spacious',this)">Spacious</button>
+      </div>
+    </div>
+  </div>
+  <button class="theme-toggle-btn" onclick="toggleThemePanel()" title="Customize Look">&#127912;</button>
+</div>
+
+
+<div class="edit-mode-bar" id="editModeBar">
+  <span id="editModeLabel">&#9776; Design Mode: OFF</span>
+  <button onclick="toggleEditMode()" id="editModeToggleBtn">Enable Drag Mode</button>
+  <button class="reset" onclick="resetLayout()">Reset Layout</button>
+</div>
 
 <div class="loader" id="loader">
   <div class="loader-text"><span>Adeena</span></div>
@@ -506,7 +613,7 @@ select.rf-input{cursor:pointer}
 </div>
 
 <header id="mainHeader">
-  <div class="logo-wrap">
+  <div class="logo-wrap draggable-el" data-el-id="logo">
     <div class="logo-a">Adeena Handloom</div>
     <div class="logo-b">Since Barabanki, U.P.</div>
   </div>
@@ -522,10 +629,10 @@ select.rf-input{cursor:pointer}
 
 <section class="hero" id="home">
   <div class="hero-left">
-    <div class="hero-eyebrow">New Arrivals 2025</div>
-    <h1 class="hero-h1">Threads of<em>Timeless Grace</em></h1>
-    <p class="hero-p">Every stole, every dupatta is a conversation between the weaver's hands and centuries of craft tradition. Handmade in the heartlands of Uttar Pradesh.</p>
-    <div class="hero-cta">
+    <div class="hero-eyebrow draggable-el" data-el-id="hero-eyebrow">New Arrivals 2025</div>
+    <h1 class="hero-h1 draggable-el" data-el-id="hero-title">Threads of<em>Timeless Grace</em></h1>
+    <p class="hero-p draggable-el" data-el-id="hero-subtitle">Every stole, every dupatta is a conversation between the weaver's hands and centuries of craft tradition. Handmade in the heartlands of Uttar Pradesh.</p>
+    <div class="hero-cta draggable-el" data-el-id="hero-cta">
       <button class="btn-primary" onclick="document.getElementById('catalogue').scrollIntoView({behavior:'smooth'})"><span>Explore Collection</span></button>
       <a class="btn-ghost" href="https://wa.me/917905282816" target="_blank">WhatsApp Us <span>&#8594;</span></a>
     </div>
@@ -534,7 +641,7 @@ select.rf-input{cursor:pointer}
   <div class="hero-right">
     <img src="https://res.cloudinary.com/ahbbk/image/upload/adeena_handloom/indigo_shibori_stole.jpg" style="width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.92) saturate(1.1)">
     <div class="hero-right-overlay"></div>
-    <div class="hero-stats">
+    <div class="hero-stats draggable-el" data-el-id="hero-stats">
       <div class="stat"><div class="stat-n">500+</div><div class="stat-l">Pieces Crafted</div></div>
       <div class="stat"><div class="stat-n">100%</div><div class="stat-l">Handmade</div></div>
       <div class="stat"><div class="stat-n">3</div><div class="stat-l">Generations</div></div>
@@ -553,7 +660,7 @@ select.rf-input{cursor:pointer}
 <!-- CUSTOMERS SECTION -->
 <section class="customers">
   <div class="cust-eyebrow">Happy Customers</div>
-  <h2 class="cust-h2">They Wore It.<br>They <em>Loved It.</em></h2>
+  <h2 class="cust-h2 draggable-el" data-el-id="customers-title">They Wore It.<br>They <em>Loved It.</em></h2>
 
   <div class="cust-grid">
     <!-- Card 1 -->
@@ -623,7 +730,7 @@ select.rf-input{cursor:pointer}
 <section class="editorial" id="about">
   <div>
     <div class="ed-label">Our Story</div>
-    <h2 class="ed-h2">Where Craft Becomes <em>Legacy</em></h2>
+    <h2 class="ed-h2 draggable-el" data-el-id="story-title">Where Craft Becomes <em>Legacy</em></h2>
     <p class="ed-body">Each piece in the Adeena Handloom collection is born from the hands of skilled artisans in Barabanki, Uttar Pradesh — where the tradition of handloom weaving has been alive for generations. We believe fashion should carry a soul. A story. A heartbeat.</p>
     <p class="ed-body">From fine khaddar stoles to sheer chanderi dupattas, every thread is chosen with intention, every weave is an act of love.</p>
     <div class="ed-sig">— Adeena Handloom</div>
@@ -662,7 +769,7 @@ select.rf-input{cursor:pointer}
 <section class="flipbook-section" id="lookbook">
   <div class="fb-header">
     <div class="fb-eyebrow">&#10022; Lookbook 2025</div>
-    <h2 class="fb-h2">Our <em>Collection Album</em></h2>
+    <h2 class="fb-h2 draggable-el" data-el-id="lookbook-title">Our <em>Collection Album</em></h2>
     <p style="font-size:.9rem;color:var(--dust);margin-top:12px;font-weight:300">Turn the pages to explore each handcrafted piece</p>
   </div>
   <div class="fb-book" id="fbBook" onclick="fbClickTurn(event)">
@@ -693,7 +800,7 @@ select.rf-input{cursor:pointer}
 <section class="catalogue" id="catalogue">
   <div class="cat-header">
     <div>
-      <h2 class="cat-h2">The <em>Collection</em></h2>
+      <h2 class="cat-h2 draggable-el" data-el-id="catalogue-title">The <em>Collection</em></h2>
     </div>
     <div class="cat-filters">
       <button class="flt on" onclick="setFilter('all',this)">All</button>
@@ -713,7 +820,7 @@ select.rf-input{cursor:pointer}
       <div style="font-size:.62rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:flex;align-items:center;gap:14px">
         <span style="display:inline-block;width:28px;height:1px;background:var(--gold)"></span>Verified Reviews
       </div>
-      <h2 class="review-h2">What Our<br><em>Customers Say</em></h2>
+      <h2 class="review-h2 draggable-el" data-el-id="reviews-title">What Our<br><em>Customers Say</em></h2>
     </div>
     <button class="btn-write-review" onclick="openReviewForm()">&#9998; Write a Review</button>
   </div>
@@ -889,7 +996,13 @@ select.rf-input{cursor:pointer}
     <h3 id="editH">Add New Item</h3>
     <div class="ef-row">
       <div class="ef"><label class="ef-label">Name</label><input type="text" class="ef-input" id="eName" placeholder="e.g. Gulabi Khaddar Stole"></div>
-      <div class="ef"><label class="ef-label">Category</label><select class="ef-input" id="eCat"><option value="stole">Stole</option><option value="dupatta">Dupatta</option><option value="shawl">Shawl</option></select></div>
+      <div class="ef"><label class="ef-label">Category</label><select class="ef-input" id="eCat" onchange="checkCustomCat(this)">
+          <option value="stole">Stole</option>
+          <option value="dupatta">Dupatta</option>
+          <option value="shawl">Shawl</option>
+          <option value="__custom__">+ Add New Category</option>
+        </select>
+        <input type="text" class="ef-input" id="eCustomCat" placeholder="New category name..." style="display:none;margin-top:8px"></div>
     </div>
     <div class="ef"><label class="ef-label">Description</label><textarea class="ef-input" id="eDesc" placeholder="Fabric, weave, colours, occasion, care..."></textarea></div>
     <div class="ef"><label class="ef-label">Price (&#8377;)</label><input type="number" class="ef-input" id="ePrice" placeholder="1200" style="max-width:180px"></div>
@@ -923,6 +1036,14 @@ select.rf-input{cursor:pointer}
     <div class="avail-trow">
       <span>Available for sale</span>
       <label class="tsw"><input type="checkbox" id="eAvail" checked><span class="tslid"></span></label>
+    </div>
+    <div class="avail-trow">
+      <span>&#128666; Home Delivery Available</span>
+      <label class="tsw"><input type="checkbox" id="eDelivery" checked><span class="tslid"></span></label>
+    </div>
+    <div class="avail-trow">
+      <span>&#128181; Cash on Delivery (COD)</span>
+      <label class="tsw"><input type="checkbox" id="eCod" checked><span class="tslid"></span></label>
     </div>
     <div class="btn-row">
       <button class="btn-cn" onclick="closeEdit()">Cancel</button>
@@ -970,6 +1091,19 @@ select.rf-input{cursor:pointer}
   </div>
 </div>
 
+
+<div class="img-fix-overlay" id="imgFixOv" onclick="if(event.target===this)closeImgFix()">
+  <div class="img-fix-box">
+    <h3>Fix Image</h3>
+    <p style="font-size:.78rem;color:var(--dust);margin-bottom:16px">Yeh image load nahi ho rahi. Naya image URL paste karein:</p>
+    <input type="text" class="al-input" id="imgFixUrl" placeholder="https://res.cloudinary.com/...">
+    <div style="display:flex;gap:10px;margin-top:20px">
+      <button class="al-btn" style="margin-top:0" onclick="saveImgFix()"><span>Update Image &#8594;</span></button>
+      <button onclick="closeImgFix()" style="flex:0 0 auto;padding:14px 20px;background:none;border:1px solid var(--petal);color:var(--dust);font-family:var(--ff-body);font-size:.72rem;cursor:pointer">Cancel</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -984,19 +1118,55 @@ const SAMPLE=[
   {id:5,name:'Cream Silk Stole',category:'stole',desc:'Handwoven pure silk stole in warm cream. Lightweight, versatile, and perfect for all seasons.',price:1650,images:[],available:true,isNew:false}
 ];
 
-function load(){try{const r=localStorage.getItem(KEY);products=r?JSON.parse(r):[...SAMPLE];}catch(e){products=[...SAMPLE];}products.forEach(p=>{if(!p.images)p.images=p.image?[p.image]:[];});}
-function save(){localStorage.setItem(KEY,JSON.stringify(products));}
+function dbToProduct(r){
+  return {id:r.id, name:r.name, category:r.category, desc:r.description||'', price:r.price,
+    images:r.images||[], available:r.available!==false, delivery:r.delivery!==false,
+    cod:r.cod!==false, isNew:!!r.is_new};
+}
+function productToDb(p){
+  return {name:p.name, category:p.category, description:p.desc, price:p.price,
+    images:p.images||[], available:p.available!==false, delivery:p.delivery!==false,
+    cod:p.cod!==false, is_new:!!p.isNew};
+}
+async function load(){
+  try{
+    const data = await supaFetch('products?order=id.asc');
+    if(data && data.length){ products = data.map(dbToProduct); return; }
+    // Empty table -> seed with SAMPLE
+    products = [...SAMPLE];
+    for(const p of products){ await upsertProduct(p, true); }
+    const data2 = await supaFetch('products?order=id.asc');
+    if(data2 && data2.length) products = data2.map(dbToProduct);
+  }catch(e){
+    console.error('Load error', e);
+    products = [...SAMPLE];
+  }
+}
+async function upsertProduct(p, isSeed){
+  const body = productToDb(p);
+  if(p.id && !isSeed && typeof p.id === 'number' && p.id < 1000000000){
+    // Existing product -> update
+    await supaFetch('products?id=eq.'+p.id, {method:'PATCH', body:JSON.stringify(body), prefer:'return=representation'});
+    return p.id;
+  } else {
+    // New product -> insert, let DB assign id
+    const res = await supaFetch('products', {method:'POST', body:JSON.stringify(body), prefer:'return=representation'});
+    return res && res[0] ? res[0].id : null;
+  }
+}
+async function deleteProductFromDb(id){
+  await supaFetch('products?id=eq.'+id, {method:'DELETE'});
+}
 function nid(){return products.length?Math.max(...products.map(p=>p.id))+1:1;}
 
 // CURSOR
 document.addEventListener('mousemove',e=>{
-  const c=document.getElementById('cur'),r=document.getElementById('curRing');
+  const c=document.getElementById('cur');
   if(c){c.style.left=e.clientX+'px';c.style.top=e.clientY+'px';}
-  if(r){setTimeout(()=>{r.style.left=e.clientX+'px';r.style.top=e.clientY+'px';},60);}
 });
 document.querySelectorAll('a,button,.flt,.pcard,.flt-search').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{document.getElementById('cur').classList.add('expand');document.getElementById('curRing').classList.add('expand');});
-  el.addEventListener('mouseleave',()=>{document.getElementById('cur').classList.remove('expand');document.getElementById('curRing').classList.remove('expand');});
+  el.addEventListener('mouseenter',()=>{var c=document.getElementById('cur');if(c)c.classList.add('expand');});
+  el.addEventListener('mouseleave',()=>{var c=document.getElementById('cur');if(c)c.classList.remove('expand');});
 });
 
 // HEADER SCROLL
@@ -1024,7 +1194,7 @@ function renderCatalogue(){
   grid.innerHTML=list.map(p=>{
     const imgs=p.images&&p.images.length?p.images:[];
     let gal=imgs.length
-      ?`<div class="pcard-gallery" id="cg${p.id}">${imgs.map((u,i)=>`<img src="${u}" alt="${p.name}" class="${i===0?'on':''} pcard-img">`).join('')}${imgs.length>1?`<div class="pcard-dots">${imgs.map((_,i)=>`<div class="pdot${i===0?' on':''}" onclick="cSlide(${p.id},${i},event)"></div>`).join('')}</div>`:''}<div class="pcard-overlay"><div class="pcard-quick"><button class="pcard-quick-btn" onclick="event.stopPropagation();openLB(${p.id})">View Details</button>${p.available?`<a class="pcard-quick-btn" href="https://wa.me/917905282816?text=${encodeURIComponent('Hi! Interested in "'+p.name+'" &#8377;'+p.price)}" target="_blank" onclick="event.stopPropagation()">WhatsApp</a>`:''}</div></div></div>`
+      ?`<div class="pcard-gallery" id="cg${p.id}">${imgs.map((u,i)=>`<img src="${u}" alt="${p.name}" class="${i===0?'on':''} pcard-img" onerror="imgErrorHandler(this,${p.id},${i})"><div class="pcard-no-img" style="display:none;position:absolute;inset:0"><svg viewBox="0 0 80 80" width="60" height="60" fill="none"><rect x="10" y="10" width="60" height="60" rx="3" stroke="#b8895a" stroke-width="1.2"/><circle cx="30" cy="30" r="8" stroke="#b8895a" stroke-width="1.2"/><path d="M10 60l22-20 16 15 10-10 12 15" stroke="#b8895a" stroke-width="1.2" fill="none"/></svg><span>Image not found</span></div>`).join('')}${imgs.length>1?`<div class="pcard-dots">${imgs.map((_,i)=>`<div class="pdot${i===0?' on':''}" onclick="cSlide(${p.id},${i},event)"></div>`).join('')}</div>`:''}<div class="pcard-overlay"><div class="pcard-quick"><button class="pcard-quick-btn" onclick="event.stopPropagation();openLB(${p.id})">View Details</button>${p.available?`<a class="pcard-quick-btn" href="https://wa.me/917905282816?text=${encodeURIComponent('Hi! Interested in "'+p.name+'" &#8377;'+p.price)}" target="_blank" onclick="event.stopPropagation()">WhatsApp</a>`:''}</div></div></div>`
       :`<div class="pcard-no-img"><svg viewBox="0 0 80 80" width="60" height="60" fill="none"><rect x="10" y="10" width="60" height="60" rx="3" stroke="#b8895a" stroke-width="1.2"/><circle cx="30" cy="30" r="8" stroke="#b8895a" stroke-width="1.2"/><path d="M10 60l22-20 16 15 10-10 12 15" stroke="#b8895a" stroke-width="1.2" fill="none"/></svg><span>No image</span></div>`;
     return `<div class="pcard${p.available?'':' sold'}" onclick="openLB(${p.id})">
       ${!p.available?'<div class="badge-sold-p">Sold Out</div>':p.isNew?'<div class="badge-new-p">New</div>':''}
@@ -1036,6 +1206,10 @@ function renderCatalogue(){
         <div class="pcard-foot">
           <div class="pcard-price">&#8377;${p.price.toLocaleString('en-IN')}<sub> /piece</sub></div>
           <div class="avail-pill"><div class="avail-dot-p${p.available?'':' no'}"></div>${p.available?'Available':'Sold Out'}</div>
+        </div>
+        <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">
+          ${p.delivery!==false?'<span style="font-size:.58rem;letter-spacing:.1em;background:rgba(45,106,79,.08);color:#2d6a4f;padding:3px 10px;border-radius:20px">&#128666; Delivery</span>':''}
+          ${p.cod!==false?'<span style="font-size:.58rem;letter-spacing:.1em;background:rgba(184,137,90,.1);color:var(--gold2);padding:3px 10px;border-radius:20px">&#128181; COD</span>':''}
         </div>
       </div>
     </div>`;
@@ -1053,10 +1227,12 @@ function openLB(id){
   document.getElementById('lbName').textContent=p.name;
   document.getElementById('lbPrice').innerHTML='&#8377;'+p.price.toLocaleString('en-IN');
   document.getElementById('lbDesc').textContent=p.desc;
-  document.getElementById('lbAvail').innerHTML=`<span class="lb-avail-pill ${p.available?'lb-avail-yes':'lb-avail-no'}">${p.available?'&#10003; Available':'Sold Out'}</span>`;
+  var delivBadge = p.delivery!==false ? '<span style="font-size:.68rem;background:rgba(45,106,79,.1);color:#2d6a4f;padding:4px 12px;border-radius:20px;margin-left:6px">&#128666; Home Delivery</span>' : '';
+  var codBadge = p.cod!==false ? '<span style="font-size:.68rem;background:rgba(184,137,90,.1);color:var(--gold2);padding:4px 12px;border-radius:20px;margin-left:6px">&#128181; COD</span>' : '';
+  document.getElementById('lbAvail').innerHTML='<div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center"><span class="lb-avail-pill '+( p.available?'lb-avail-yes':'lb-avail-no')+'">'+(p.available?'&#10003; Available':'Sold Out')+'</span>'+delivBadge+codBadge+'</div>';
   const gal=document.getElementById('lbGallery');
   if(lbImgs.length){
-    gal.innerHTML=`<div class="lb-slides" id="lbSlides">${lbImgs.map((u,i)=>`<img src="${u}" alt="${p.name}" class="${i===0?'on':''}">`).join('')}</div>${lbImgs.length>1?`<button class="lb-prev" onclick="lbNav(-1)">&#8249;</button><button class="lb-next" onclick="lbNav(1)">&#8250;</button><div class="lb-thumbs">${lbImgs.map((u,i)=>`<img src="${u}" class="lb-thumb${i===0?' on':''}" onclick="lbGo(${i})">`).join('')}</div>`:''}`;
+    gal.innerHTML=`<div class="lb-slides" id="lbSlides">${lbImgs.map((u,i)=>`<img src="${u}" alt="${p.name}" class="${i===0?'on':''}" onerror="imgErrorHandler(this,${p.id},${i})">`).join('')}</div>${lbImgs.length>1?`<button class="lb-prev" onclick="lbNav(-1)">&#8249;</button><button class="lb-next" onclick="lbNav(1)">&#8250;</button><div class="lb-thumbs">${lbImgs.map((u,i)=>`<img src="${u}" class="lb-thumb${i===0?' on':''}" onclick="lbGo(${i})">`).join('')}</div>`:''}`;
   } else {
     gal.innerHTML=`<div class="lb-no-img"><svg viewBox="0 0 80 80" width="80" height="80" fill="none"><rect x="10" y="10" width="60" height="60" rx="3" stroke="#b8895a" stroke-width="1.2"/><circle cx="30" cy="30" r="8" stroke="#b8895a" stroke-width="1.2"/><path d="M10 60l22-20 16 15 10-10 12 15" stroke="#b8895a" stroke-width="1.2" fill="none"/></svg></div>`;
   }
@@ -1071,8 +1247,14 @@ function closeLB(){document.getElementById('lightbox').classList.remove('open');
 // ADMIN
 function openAdminLogin(){document.getElementById('alPass').value='';document.getElementById('alErr').style.display='none';document.getElementById('alOverlay').classList.add('open');setTimeout(()=>document.getElementById('alPass').focus(),150);}
 function closeAdminLogin(){document.getElementById('alOverlay').classList.remove('open');}
-function doLogin(){if(document.getElementById('alPass').value===PASS){closeAdminLogin();renderATable();document.getElementById('panelOv').classList.add('open');}else{document.getElementById('alErr').style.display='block';document.getElementById('alPass').value='';document.getElementById('alPass').focus();}}
-function doLogout(){document.getElementById('panelOv').classList.remove('open');}
+// doLogin defined later (Supabase-synced password)
+function doLogout(){
+  document.getElementById('panelOv').classList.remove('open');
+  document.body.classList.remove('admin-mode');
+  exitEditMode();
+  document.getElementById('editModeBar').classList.remove('active');
+  renderCatalogue();
+}
 
 function renderATable(){
   document.getElementById('aTbody').innerHTML=products.map(p=>`<tr>
@@ -1085,15 +1267,52 @@ function renderATable(){
   </tr>`).join('');
 }
 
-function togAvail(id,v){const p=products.find(x=>x.id===id);if(p){p.available=v;save();renderCatalogue();toast(v?'Marked Available':'Marked Sold Out');}}
-function delItem(id){if(!confirm('Delete this item?'))return;products=products.filter(p=>p.id!==id);save();renderATable();renderCatalogue();toast('Item deleted');}
+async function togAvail(id,v){
+  const p=products.find(x=>x.id===id);
+  if(p){
+    p.available=v;renderCatalogue();
+    try{ await upsertProduct(p); toast(v?'Marked Available':'Marked Sold Out'); }
+    catch(e){ p.available=!v; renderCatalogue(); toast('Error updating — try again'); }
+  }
+}
+async function delItem(id){
+  if(!confirm('Delete this item?'))return;
+  try{
+    await deleteProductFromDb(id);
+    products=products.filter(p=>p.id!==id);
+    renderATable();renderCatalogue();renderFB();toast('Item deleted');
+  }catch(e){ toast('Error deleting — try again'); }
+}
 
 function openEdit(id){
   editId=id;editImgs=[];
   document.getElementById('editH').textContent=id?'Edit Item':'Add New Item';
   document.getElementById('uBar').style.display='none';document.getElementById('uStatus').style.display='none';
-  if(id){const p=products.find(x=>x.id===id);document.getElementById('eName').value=p.name;document.getElementById('eCat').value=p.category;document.getElementById('eDesc').value=p.desc;document.getElementById('ePrice').value=p.price;document.getElementById('eAvail').checked=p.available;editImgs=[...(p.images||[])];}
-  else{document.getElementById('eName').value='';document.getElementById('eCat').value='stole';document.getElementById('eDesc').value='';document.getElementById('ePrice').value='';document.getElementById('eAvail').checked=true;}
+  if(id){
+    const p=products.find(x=>x.id===id);
+    document.getElementById('eName').value=p.name;
+    // Set category — add as option if custom
+    var catSel = document.getElementById('eCat');
+    var catExists = Array.from(catSel.options).some(function(o){return o.value===p.category;});
+    if(!catExists && p.category) addCustomCatOption(p.category);
+    catSel.value=p.category;
+    document.getElementById('eCustomCat').style.display='none';
+    document.getElementById('eDesc').value=p.desc;
+    document.getElementById('ePrice').value=p.price;
+    document.getElementById('eAvail').checked=p.available;
+    var d=document.getElementById('eDelivery'); if(d) d.checked=p.delivery!==false;
+    var c=document.getElementById('eCod'); if(c) c.checked=p.cod!==false;
+    editImgs=[...(p.images||[])];
+  } else {
+    document.getElementById('eName').value='';
+    document.getElementById('eCat').value='stole';
+    document.getElementById('eCustomCat').style.display='none';
+    document.getElementById('eDesc').value='';
+    document.getElementById('ePrice').value='';
+    document.getElementById('eAvail').checked=true;
+    var d=document.getElementById('eDelivery'); if(d) d.checked=true;
+    var c=document.getElementById('eCod'); if(c) c.checked=true;
+  }
   renderPrevs();document.getElementById('editOv').classList.add('open');
 }
 function closeEdit(){document.getElementById('editOv').classList.remove('open');}
@@ -1110,6 +1329,14 @@ async function handleFiles(files){
     try{const url=await uploadImg(files[i]);editImgs.push(url);renderPrevs();}catch(e){toast('Upload failed for an image');}
   }
   fill.style.width='100%';status.textContent='Done! '+files.length+' image'+(files.length>1?'s':'')+' uploaded';
+  // Auto-fill name from first file if empty
+  if (editImgs.length > 0) {
+    var nameField = document.getElementById('eName');
+    if (nameField && !nameField.value.trim()) {
+      var autoName = extractNameFromUrl(editImgs[0]);
+      if (autoName) nameField.value = autoName;
+    }
+  }
   setTimeout(()=>{bar.style.display='none';status.style.display='none';},2500);
 }
 async function uploadImg(file){
@@ -1118,14 +1345,38 @@ async function uploadImg(file){
   if(!res.ok)throw new Error('fail');return(await res.json()).secure_url;
 }
 
-function saveItem(){
+async function saveItem(){
   const name=document.getElementById('eName').value.trim(),price=parseInt(document.getElementById('ePrice').value);
   if(!name){alert('Please enter a product name.');return;}
   if(!price||price<1){alert('Please enter a valid price.');return;}
-  const data={name,category:document.getElementById('eCat').value,desc:document.getElementById('eDesc').value.trim()||'Beautiful handcrafted piece.',price,images:[...editImgs],available:document.getElementById('eAvail').checked,isNew:!editId};
-  if(editId){const i=products.findIndex(p=>p.id===editId);products[i]={...products[i],...data};}
-  else{products.push({id:nid(),...data});}
-  save();renderCatalogue();renderATable();closeEdit();toast(editId?'Item updated':'Item added');
+  var catEl = document.getElementById('eCat');
+  var customCatEl = document.getElementById('eCustomCat');
+  var category = catEl.value === '__custom__' ? (customCatEl.value.trim().toLowerCase() || 'other') : catEl.value;
+  if (catEl.value === '__custom__' && customCatEl.value.trim()) {
+    await addCustomCatOption(customCatEl.value.trim());
+  }
+  var deliveryEl = document.getElementById('eDelivery');
+  var codEl = document.getElementById('eCod');
+  const data={name,category:category,desc:document.getElementById('eDesc').value.trim()||'Beautiful handcrafted piece.',price,images:[...editImgs],available:document.getElementById('eAvail').checked,delivery:deliveryEl?deliveryEl.checked:true,cod:codEl?codEl.checked:true,isNew:!editId};
+  const btn = document.querySelector('.btn-sv');
+  if(btn) btn.style.opacity='0.6';
+  try{
+    if(editId){
+      const i=products.findIndex(p=>p.id===editId);
+      products[i]={...products[i],...data};
+      await upsertProduct(products[i]);
+    } else {
+      const tempProduct={id:Date.now(),...data};
+      const newId = await upsertProduct(tempProduct, true);
+      tempProduct.id = newId || tempProduct.id;
+      products.push(tempProduct);
+    }
+    renderCatalogue();renderATable();renderFB();closeEdit();toast(editId?'Item updated':'Item added');
+  }catch(e){
+    toast('Error saving — check internet connection');
+    console.error(e);
+  }
+  if(btn) btn.style.opacity='1';
 }
 
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),2500);}
@@ -1478,11 +1729,16 @@ function addUrlImg() {
 function applyServiceKey() {
   var key = document.getElementById('serviceKeyInput').value.trim();
   if (!key || !key.startsWith('eyJ')) { toast('Valid service key enter karein'); return; }
-  // Dynamically update
   window.SUPA_SERVICE_DYNAMIC = key;
+  localStorage.setItem('adeena_service_key', key);
   document.getElementById('serviceKeyBanner').innerHTML = '<span style="font-size:.75rem;color:#4a9a4a">&#10003; Service key set! Pending reviews load ho rahe hain...</span>';
   loadAdminRv(false);
 }
+// Restore service key from localStorage on this device
+(function(){
+  var k = localStorage.getItem('adeena_service_key');
+  if (k) window.SUPA_SERVICE_DYNAMIC = k;
+})();
 
 // Override supaFetch to check dynamic key
 const _origSupaFetch = supaFetch;
@@ -1506,43 +1762,45 @@ function fbClickTurn(e) {
   else { fbPrev(); }
 }
 
-// CHANGE PASSWORD
-var ADMIN_PASS_CURRENT = '@Adeena2816@';
+// CHANGE PASSWORD (Supabase-synced)
+var ADMIN_PASS_CURRENT = PASS;
+async function loadAdminPass(){
+  ADMIN_PASS_CURRENT = await getSetting('admin_pass', PASS);
+}
 function openChangePass() { 
   ['cpCurrent','cpNew','cpConfirm'].forEach(function(id){document.getElementById(id).value='';});
   document.getElementById('cpErr').style.display='none';
   document.getElementById('changePassOv').classList.add('open'); 
 }
 function closeChangePass() { document.getElementById('changePassOv').classList.remove('open'); }
-function doChangePass() {
+async function doChangePass() {
   var cur = document.getElementById('cpCurrent').value;
   var nw = document.getElementById('cpNew').value;
   var cf = document.getElementById('cpConfirm').value;
   var err = document.getElementById('cpErr');
-  if (cur !== ADMIN_PASS_CURRENT && cur !== PASS) { err.textContent='Current password incorrect.'; err.style.display='block'; return; }
+  if (cur !== ADMIN_PASS_CURRENT) { err.textContent='Current password incorrect.'; err.style.display='block'; return; }
   if (nw.length < 6) { err.textContent='New password must be at least 6 characters.'; err.style.display='block'; return; }
   if (nw !== cf) { err.textContent='Passwords do not match.'; err.style.display='block'; return; }
+  await setSetting('admin_pass', nw);
   ADMIN_PASS_CURRENT = nw;
-  localStorage.setItem('adeena_admin_pass', nw);
   closeChangePass();
-  toast('Password updated successfully ✓');
+  toast('Password updated — works on all devices now ✓');
 }
 
-// Load saved password on startup
-(function() {
-  var saved = localStorage.getItem('adeena_admin_pass');
-  if (saved) ADMIN_PASS_CURRENT = saved;
-})();
-
-// Override doLogin to use dynamic password
-var _origDoLogin = doLogin;
+// doLogin uses Supabase-synced password (works on any device)
 function doLogin() {
   var val = document.getElementById('alPass').value;
-  var checkPass = localStorage.getItem('adeena_admin_pass') || PASS;
-  if (val === checkPass) {
+  if (val === ADMIN_PASS_CURRENT) {
     document.getElementById('alOverlay').classList.remove('open');
     renderATable();
+    var banner=document.getElementById('serviceKeyBanner');
+    if(banner && window.SUPA_SERVICE_DYNAMIC){
+      banner.innerHTML='<span style="font-size:.75rem;color:#4a9a4a">&#10003; Service key already set on this device</span>';
+    }
     document.getElementById('panelOv').classList.add('open');
+    document.body.classList.add('admin-mode');
+    renderCatalogue();
+    document.getElementById('editModeBar').classList.add('active');
   } else {
     document.getElementById('alErr').style.display = 'block';
     document.getElementById('alPass').value = '';
@@ -1558,40 +1816,298 @@ function openBulkImport() {
   document.getElementById('bulkImportOv').classList.add('open'); 
 }
 function closeBulkImport() { document.getElementById('bulkImportOv').classList.remove('open'); }
-function doBulkImport() {
+async function doBulkImport() {
   var raw = document.getElementById('biUrls').value;
   var urls = raw.split('\n').map(function(u){return u.trim();}).filter(function(u){return u.startsWith('http');});
   if (!urls.length) { toast('Koi valid URL nahi mili'); return; }
   var status = document.getElementById('biStatus');
   status.style.display='block';
-  status.textContent = urls.length + ' images se ' + urls.length + ' products banaye ja rahe hain...';
-  
+  status.textContent = '0 / ' + urls.length + ' products created...';
+
   var created = 0;
-  urls.forEach(function(url, i) {
-    // Extract name from URL
-    var parts = url.split('/');
-    var fname = parts[parts.length-1].replace(/\.[^.]+$/, '').replace(/_/g,' ').replace(/-/g,' ');
-    var name = fname.charAt(0).toUpperCase() + fname.slice(1) || ('Product ' + (i+1));
+  for (var i=0;i<urls.length;i++){
+    var url = urls[i];
+    var name = extractNameFromUrl(url) || ('Product ' + (i+1));
     var newProduct = {
-      id: nid() + i,
-      name: name,
-      category: 'stole',
+      name: name, category: 'stole',
       desc: 'Handcrafted piece from Adeena Handloom, Barabanki.',
-      price: 999,
-      images: [url],
-      available: true,
-      isNew: true
+      price: 999, images: [url], available: true, delivery:true, cod:true, isNew: true
     };
-    products.push(newProduct);
-    created++;
-  });
-  
-  save(); renderCatalogue(); renderATable(); renderFB();
-  status.textContent = '✓ ' + created + ' products created! Please edit each one to update name, category and price.';
+    try{
+      var newId = await upsertProduct(newProduct, true);
+      newProduct.id = newId || Date.now()+i;
+      products.push(newProduct);
+      created++;
+      status.textContent = created + ' / ' + urls.length + ' products created...';
+    }catch(e){ console.error('Bulk import error', e); }
+  }
+
+  renderCatalogue(); renderATable(); renderFB();
+  status.textContent = '✓ ' + created + ' products created! Edit each to set name/category/price.';
   setTimeout(function(){ closeBulkImport(); toast(created + ' products imported!'); }, 2000);
 }
 
-load();renderCatalogue();initFloaters();setTimeout(renderFB,200);setTimeout(function(){loadReviews(true);renderFB();},300);
+
+
+// ===== BROKEN IMAGE FIX (admin) =====
+var imgFixCtx = null; // {productId, imgIndex}
+function openImgFix(productId, imgIndex){
+  imgFixCtx = {productId:productId, imgIndex:imgIndex};
+  var p = products.find(function(x){return x.id===productId;});
+  document.getElementById('imgFixUrl').value = (p && p.images[imgIndex]) || '';
+  document.getElementById('imgFixOv').classList.add('open');
+}
+function closeImgFix(){ document.getElementById('imgFixOv').classList.remove('open'); imgFixCtx=null; }
+async function saveImgFix(){
+  if(!imgFixCtx) return;
+  var url = document.getElementById('imgFixUrl').value.trim();
+  if(!url.startsWith('http')){ toast('Valid URL enter karein'); return; }
+  var p = products.find(function(x){return x.id===imgFixCtx.productId;});
+  if(p){
+    p.images[imgFixCtx.imgIndex] = url;
+    try{ await upsertProduct(p); renderCatalogue(); renderFB(); toast('Image updated ✓'); }
+    catch(e){ toast('Error saving'); }
+  }
+  closeImgFix();
+}
+function imgErrorHandler(el, productId, imgIndex){
+  el.style.display='none';
+  var ph = el.nextElementSibling;
+  if(ph) ph.style.display='flex';
+  var wrap = el.closest('.pcard-gallery, .lb-slides, .fb-page-inner');
+  if(wrap && isAdminLoggedIn()){
+    var btn = document.createElement('button');
+    btn.className='img-fix-btn'; btn.style.display='block';
+    btn.textContent='Fix Image';
+    btn.onclick=function(ev){ ev.stopPropagation(); openImgFix(productId, imgIndex); };
+    wrap.style.position='relative';
+    wrap.appendChild(btn);
+  }
+}
+function isAdminLoggedIn(){
+  return document.getElementById('panelOv').classList.contains('open') || document.body.classList.contains('admin-mode');
+}
+
+// ===== SETTINGS (Supabase) =====
+var customCategories = [];
+
+async function getSetting(key, fallback){
+  try{
+    const data = await supaFetch('settings?key=eq.'+encodeURIComponent(key)+'&select=value');
+    if(data && data.length) return data[0].value;
+  }catch(e){}
+  return fallback;
+}
+async function setSetting(key, value){
+  try{
+    await supaFetch('settings', {method:'POST', prefer:'resolution=merge-duplicates,return=minimal',
+      body:JSON.stringify({key:key, value:String(value)})});
+  }catch(e){ console.error('Setting save error', e); }
+}
+
+
+// ===== DRAG & DROP EDIT MODE =====
+var editModeOn = false;
+var layoutPositions = {};
+var dragState = null;
+
+function toggleEditMode(){
+  editModeOn = !editModeOn;
+  document.body.classList.toggle('edit-active', editModeOn);
+  document.getElementById('editModeLabel').textContent = editModeOn ? '☑ Design Mode: ON' : '☐ Design Mode: OFF';
+  document.getElementById('editModeToggleBtn').textContent = editModeOn ? 'Disable Drag Mode' : 'Enable Drag Mode';
+  if(editModeOn) attachDragHandlers();
+}
+function exitEditMode(){
+  editModeOn = false;
+  document.body.classList.remove('edit-active');
+}
+
+async function loadLayout(){
+  var raw = await getSetting('layout_positions', '{}');
+  try{ layoutPositions = JSON.parse(raw) || {}; }catch(e){ layoutPositions = {}; }
+  applyLayout();
+}
+function applyLayout(){
+  document.querySelectorAll('.draggable-el').forEach(function(el){
+    var id = el.dataset.elId;
+    var pos = layoutPositions[id];
+    if(pos){
+      el.style.transform = 'translate(' + pos.x + 'px,' + pos.y + 'px)';
+      el.style.position = 'relative';
+    }
+  });
+}
+async function saveLayout(){
+  await setSetting('layout_positions', JSON.stringify(layoutPositions));
+}
+async function resetLayout(){
+  if(!confirm('Reset all positions to default?')) return;
+  layoutPositions = {};
+  document.querySelectorAll('.draggable-el').forEach(function(el){
+    el.style.transform=''; el.style.position='';
+  });
+  await saveLayout();
+  toast('Layout reset ✓');
+}
+
+function attachDragHandlers(){
+  document.querySelectorAll('.draggable-el').forEach(function(el){
+    if(el._dragBound) return;
+    el._dragBound = true;
+    el.style.position = el.style.position || 'relative';
+
+    function startDrag(clientX, clientY){
+      if(!editModeOn) return;
+      var id = el.dataset.elId;
+      var cur = layoutPositions[id] || {x:0,y:0};
+      dragState = {el:el, id:id, startX:clientX, startY:clientY, origX:cur.x, origY:cur.y};
+      el.classList.add('dragging');
+    }
+    function moveDrag(clientX, clientY){
+      if(!dragState || dragState.el!==el) return;
+      var dx = clientX - dragState.startX;
+      var dy = clientY - dragState.startY;
+      var nx = dragState.origX + dx;
+      var ny = dragState.origY + dy;
+      el.style.transform = 'translate(' + nx + 'px,' + ny + 'px)';
+      el._pendingPos = {x:nx, y:ny};
+    }
+    function endDrag(){
+      if(!dragState || dragState.el!==el) return;
+      el.classList.remove('dragging');
+      if(el._pendingPos){
+        layoutPositions[el.dataset.elId] = el._pendingPos;
+        saveLayout();
+      }
+      dragState = null;
+    }
+
+    el.addEventListener('mousedown', function(e){
+      if(!editModeOn) return;
+      e.preventDefault(); e.stopPropagation();
+      startDrag(e.clientX, e.clientY);
+    });
+    document.addEventListener('mousemove', function(e){ moveDrag(e.clientX, e.clientY); });
+    document.addEventListener('mouseup', function(){ endDrag(); });
+
+    el.addEventListener('touchstart', function(e){
+      if(!editModeOn) return;
+      e.preventDefault();
+      var t=e.touches[0]; startDrag(t.clientX, t.clientY);
+    }, {passive:false});
+    document.addEventListener('touchmove', function(e){
+      if(!dragState) return;
+      var t=e.touches[0]; moveDrag(t.clientX, t.clientY);
+    }, {passive:false});
+    document.addEventListener('touchend', function(){ endDrag(); });
+  });
+}
+
+// ===== THEMES =====
+async function applyTheme(name, el) {
+  document.documentElement.setAttribute('data-theme', name);
+  document.querySelectorAll('.tswatch').forEach(function(s){ s.classList.remove('active'); });
+  if(el) el.classList.add('active');
+  else document.querySelectorAll('.tswatch').forEach(function(s){ if(s.dataset.theme===name) s.classList.add('active'); });
+  await setSetting('theme', name);
+}
+function toggleThemePanel() {
+  var sw = document.getElementById('themeSwatches');
+  sw.classList.toggle('open');
+}
+async function loadTheme(){
+  var t = await getSetting('theme', 'rose');
+  document.documentElement.setAttribute('data-theme', t);
+  document.querySelectorAll('.tswatch').forEach(function(s){ s.classList.toggle('active', s.dataset.theme===t); });
+  var f = await getSetting('font', 'classic');
+  document.documentElement.setAttribute('data-font', f);
+  document.querySelectorAll('#fontOptRow .theme-opt-btn').forEach(function(b){ b.classList.toggle('active', b.dataset.font===f); });
+  var sz = await getSetting('size', 'normal');
+  document.documentElement.setAttribute('data-size', sz);
+  document.querySelectorAll('#sizeOptRow .theme-opt-btn').forEach(function(b){ b.classList.toggle('active', b.dataset.size===sz); });
+}
+async function applyFont(name, el){
+  document.documentElement.setAttribute('data-font', name);
+  document.querySelectorAll('#fontOptRow .theme-opt-btn').forEach(function(b){ b.classList.remove('active'); });
+  if(el) el.classList.add('active');
+  await setSetting('font', name);
+}
+async function applySize(name, el){
+  document.documentElement.setAttribute('data-size', name);
+  document.querySelectorAll('#sizeOptRow .theme-opt-btn').forEach(function(b){ b.classList.remove('active'); });
+  if(el) el.classList.add('active');
+  await setSetting('size', name);
+}
+
+// ===== CUSTOM CATEGORY =====
+async function addCustomCatOption(name) {
+  var sel = document.getElementById('eCat');
+  var val = name.toLowerCase();
+  if (!Array.from(sel.options).some(function(o){ return o.value===val; })) {
+    var opt = document.createElement('option');
+    opt.value = val; opt.textContent = name.charAt(0).toUpperCase()+name.slice(1);
+    var customOpt = Array.from(sel.options).find(function(o){ return o.value==='__custom__'; });
+    sel.insertBefore(opt, customOpt);
+    if (!customCategories.includes(val)) {
+      customCategories.push(val);
+      await setSetting('custom_categories', JSON.stringify(customCategories));
+    }
+    addFilterBtn(name);
+  }
+}
+async function loadCustomCategories() {
+  var raw = await getSetting('custom_categories', '[]');
+  try{ customCategories = JSON.parse(raw) || []; }catch(e){ customCategories = []; }
+  customCategories.forEach(function(cat){ addCustomCatOption(cat); });
+}
+function addFilterBtn(name) {
+  var val = name.toLowerCase();
+  var bar = document.querySelector('.cat-filters');
+  if (!bar) return;
+  if (bar.querySelector('[data-cat="'+val+'"]')) return;
+  var btn = document.createElement('button');
+  btn.className = 'flt';
+  btn.textContent = name.charAt(0).toUpperCase()+name.slice(1);
+  btn.setAttribute('data-cat', val);
+  btn.onclick = function(){ setFilter(val, btn); };
+  // Insert before search input
+  var srch = bar.querySelector('.flt-search');
+  bar.insertBefore(btn, srch);
+}
+function checkCustomCat(sel) {
+  var inp = document.getElementById('eCustomCat');
+  if (sel.value === '__custom__') {
+    inp.style.display = 'block';
+    inp.focus();
+  } else {
+    inp.style.display = 'none';
+  }
+}
+// Click outside to close theme panel
+document.addEventListener('click', function(e) {
+  var bar = document.getElementById('themeBar');
+  if (bar && !bar.contains(e.target)) {
+    var sw = document.getElementById('themeSwatches');
+    if (sw) sw.classList.remove('open');
+  }
+});
+// Click effect on cursor
+document.addEventListener('mousedown', function(){var c=document.getElementById('cur');if(c)c.classList.add('clicking');});
+document.addEventListener('mouseup', function(){var c=document.getElementById('cur');if(c)c.classList.remove('clicking');});
+
+async function initApp(){
+  await loadAdminPass();
+  await loadTheme();
+  await loadCustomCategories();
+  await load();
+  renderCatalogue();
+  initFloaters();
+  renderFB();
+  loadReviews(true);
+  await loadLayout();
+}
+initApp();
 </script>
 </body>
 </html>
