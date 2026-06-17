@@ -78,10 +78,10 @@ header.scrolled{background:rgba(250,245,240,.97);backdrop-filter:blur(12px);padd
 .btn-primary span{position:relative;z-index:1}
 .btn-ghost{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink2);text-decoration:none;display:flex;align-items:center;gap:10px;transition:gap .3s}
 .btn-ghost:hover{gap:18px;color:var(--gold)}
-.hero-scroll{position:absolute;bottom:40px;left:100px;display:flex;align-items:center;gap:12px;font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--dust)}
-.scroll-line{width:60px;height:1px;background:var(--dust);position:relative;overflow:hidden}
-.scroll-line::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:var(--gold);animation:scrollAnim 2s ease infinite}
-@keyframes scrollAnim{to{left:100%}}
+
+
+
+
 .hero-right{position:relative;overflow:hidden;min-height:400px}
 .hero-img-main{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.05);animation:heroZoom 8s ease forwards}
 @keyframes heroZoom{to{transform:scale(1)}}
@@ -567,6 +567,8 @@ select.rf-input{cursor:pointer}
 
 /* ===== DRAG-DROP EDIT MODE ===== */
 .edit-mode-bar{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:2000;background:var(--ink);color:var(--cream);padding:10px 24px;border-radius:30px;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;display:none;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.3);max-width:90vw}
+.f9-badge{position:fixed;right:16px;bottom:80px;z-index:1999;background:rgba(26,15,15,.85);color:var(--gold);padding:6px 14px;border-radius:20px;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;display:none;backdrop-filter:blur(4px);border:1px solid rgba(184,137,90,.3)}
+body.admin-mode .f9-badge{display:block}
 .edit-mode-bar.active{display:flex}
 .edit-mode-bar button{background:var(--gold);color:white;border:none;padding:6px 16px;border-radius:20px;font-size:.65rem;font-family:var(--ff-body);cursor:pointer;letter-spacing:.1em}
 .edit-mode-bar button.reset{background:#c0392b}
@@ -725,6 +727,56 @@ body.admin-mode.edit-active .img-edit-pencil{display:flex}
 .crop-save-btn{background:var(--gold);color:white;border:none;padding:5px 14px;border-radius:6px;font-size:.65rem;font-family:var(--ff-body);cursor:pointer;letter-spacing:.1em}
 .edit-active img:not(.ribbon-img):not(.logo-bounce):not(.tprev):not(.lb-thumb):not(.dthumb):not(.prev-w img){cursor:crosshair;outline:1.5px dashed rgba(184,137,90,.4)}
 .edit-active img:not(.ribbon-img):not(.logo-bounce):not(.tprev):not(.lb-thumb):not(.dthumb):not(.prev-w img):hover{outline:2px solid var(--gold)}
+
+/* LOOKBOOK PAGE THEMES */
+.fb-left.lb-theme-rose,.fb-right.lb-theme-rose{background:#FDF0F2}
+.fb-left.lb-theme-ivory,.fb-right.lb-theme-ivory{background:#FBF6F0}
+.fb-left.lb-theme-dark,.fb-right.lb-theme-dark{background:#1a0f0f}
+.fb-left.lb-theme-dark .fb-caption,.fb-left.lb-theme-dark .fb-caption-sub,.fb-right.lb-theme-dark .fb-caption,.fb-right.lb-theme-dark .fb-caption-sub{color:rgba(250,245,240,.85)}
+.fb-left.lb-theme-dark .fb-page-num,.fb-right.lb-theme-dark .fb-page-num{color:rgba(250,245,240,.4)}
+.fb-left.lb-theme-silk,.fb-right.lb-theme-silk{background:linear-gradient(135deg,#f5e6e0 0%,#ede0c8 50%,#f5e6e0 100%)}
+.fb-left.lb-theme-texture,.fb-right.lb-theme-texture{
+  background-color:#f5e6e0;
+  background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9a96e' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+.fb-left.lb-theme-gold,.fb-right.lb-theme-gold{background:linear-gradient(135deg,#2d1e0f 0%,#1a0f0f 100%)}
+.fb-left.lb-theme-gold .fb-caption,.fb-right.lb-theme-gold .fb-caption{color:var(--gold2)}
+.fb-left.lb-theme-gold .fb-caption-sub,.fb-right.lb-theme-gold .fb-caption-sub{color:rgba(201,169,110,.7)}
+.fb-left.lb-theme-gold .fb-page-num,.fb-right.lb-theme-gold .fb-page-num{color:rgba(201,169,110,.5)}
+
+/* Lookbook theme selector */
+.lb-theme-selector{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:20px;flex-wrap:wrap}
+.lb-theme-selector span{font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--dust);margin-right:4px}
+.lb-theme-swatch{width:28px;height:28px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:all .2s;box-shadow:0 2px 6px rgba(0,0,0,.1)}
+.lb-theme-swatch.active,.lb-theme-swatch:hover{border-color:var(--gold);transform:scale(1.15)}
+
+/* CUSTOMER EDIT */
+.cust-edit-btn{position:absolute;top:10px;right:10px;background:rgba(250,245,240,.15);color:rgba(250,245,240,.6);border:none;width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:.75rem;display:none;align-items:center;justify-content:center;transition:all .2s}
+body.admin-mode .cust-edit-btn{display:flex}
+.cust-card{position:relative}
+.cust-edit-btn:hover{background:var(--gold);color:white}
+.cust-add-btn{grid-column:1/-1;background:none;border:1px dashed rgba(250,245,240,.2);color:rgba(250,245,240,.4);padding:20px;cursor:pointer;font-family:var(--ff-body);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;transition:all .3s;width:100%}
+.cust-add-btn:hover{color:var(--gold2);border-color:var(--gold2)}
+
+/* HERO FULL BG MODE */
+.hero.hero-fullbg{grid-template-columns:1fr;background:var(--ink)}
+.hero.hero-fullbg .hero-right{position:absolute;inset:0;z-index:0}
+.hero.hero-fullbg .hero-right img{filter:brightness(.45) saturate(.9)}
+.hero.hero-fullbg .hero-right-overlay{background:linear-gradient(to right,rgba(26,15,15,.75) 0%,rgba(26,15,15,.2) 100%)}
+.hero.hero-fullbg .hero-left{position:relative;z-index:2;grid-column:1;padding:160px 100px 100px}
+.hero.hero-fullbg .hero-h1{color:var(--cream)}
+.hero.hero-fullbg .hero-p{color:rgba(250,245,240,.7)}
+.hero.hero-fullbg .hero-eyebrow{color:var(--gold2)}
+.hero.hero-fullbg .btn-primary{background:var(--gold);border:none}
+.hero.hero-fullbg .btn-ghost{color:var(--cream)}
+.hero.hero-fullbg .hero-stats{background:rgba(250,245,240,.1);border-top-color:var(--gold)}
+.hero.hero-fullbg .stat-n{color:var(--cream)}
+.hero.hero-fullbg .stat-l{color:rgba(250,245,240,.6)}
+@media(max-width:900px){
+  .hero.hero-fullbg .hero-left{padding:130px 24px 60px}
+}
+
+.hero-stats .stat-n{font-family:var(--ff-display);font-size:1.8rem;font-weight:400;color:var(--ink)}
+.hero-stats .stat-l{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--dust);margin-top:3px}
 </style>
 </head>
 <body>
@@ -769,6 +821,7 @@ body.admin-mode.edit-active .img-edit-pencil{display:flex}
 <div class="edit-mode-bar" id="editModeBar">
   <span id="editModeLabel">&#9776; Design Mode: OFF</span>
   <button onclick="toggleEditMode()" id="editModeToggleBtn">Enable Edit Mode</button>
+  <button onclick="toggleHeroBg()" id="heroBgBtn">Hero: Split</button>
   <button onclick="addCustomBox()">+ Box</button>
   <button onclick="addCustomLine()">+ Line</button>
   <button class="reset" onclick="resetLayout()">Reset Layout</button>
@@ -790,6 +843,7 @@ body.admin-mode.edit-active .img-edit-pencil{display:flex}
     <option value="'Jost',sans-serif">Jost</option>
   </select>
 </div>
+<div class="f9-badge" id="f9Badge">F9: Edit OFF</div>
 
 <div class="loader" id="loader">
   <div class="loader-text"><span>Adeena</span></div>
@@ -805,9 +859,10 @@ body.admin-mode.edit-active .img-edit-pencil{display:flex}
   <nav class="nav-links">
     <a href="#catalogue">Collection</a>
     <a href="#lookbook">Lookbook</a>
+    <a href="#wholesale">Wholesale</a>
     <a href="#reviews">Reviews</a>
     <a href="#about">Our Story</a>
-    <a href="https://wa.me/917905282816" target="_blank">WhatsApp</a>
+    <a href="https://wa.me/917905282816?text=Hello%20Adeena%20Handloom%2C%20I%20would%20like%20to%20enquire%20about%20your%20products." target="_blank">WhatsApp</a>
   </nav>
   <button class="btn-admin-nav" onclick="openAdminLogin()">Admin</button>
 </header>
@@ -822,7 +877,6 @@ body.admin-mode.edit-active .img-edit-pencil{display:flex}
       <button class="btn-primary" style="background:none;border:1px solid var(--ink);color:var(--ink)" onclick="document.getElementById('wholesale').scrollIntoView({behavior:'smooth'})"><span>Get Wholesale Price List</span></button>
       <a class="btn-ghost" href="https://wa.me/917905282816?text=Hello%20Adeena%20Handloom%2C%20Please%20send%20wholesale%20catalogue%20and%20pricing." target="_blank">WhatsApp Us <span>&#8594;</span></a>
     </div>
-    <div class="hero-scroll"><div class="scroll-line"></div>Scroll</div>
   </div>
   <div class="hero-right">
     <img src="https://res.cloudinary.com/ahbbk/image/upload/adeena_handloom/indigo_shibori_stole.jpg" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.92) saturate(1.1)">
@@ -848,7 +902,7 @@ body.admin-mode.edit-active .img-edit-pencil{display:flex}
 <!-- MANUFACTURING JOURNEY -->
 <section class="journey-section">
   <div class="journey-header">
-    <div class="ed-label" style="justify-content:center">&#10022; Our Process</div>
+    <div class="ed-label draggable-el" data-el-id="journey-label" style="justify-content:center">&#10022; Our Process</div>
     <h2 class="journey-h2">From Thread to <em>Tradition</em></h2>
   </div>
   <div class="journey-timeline">
@@ -891,62 +945,8 @@ body.admin-mode.edit-active .img-edit-pencil{display:flex}
   <div class="cust-eyebrow">Happy Customers</div>
   <h2 class="cust-h2 draggable-el" data-el-id="customers-title">They Wore It.<br>They <em>Loved It.</em></h2>
 
-  <div class="cust-grid">
-    <!-- Card 1 -->
-    <div class="cust-card">
-      <div class="cust-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <div class="cust-quote">Maine pehli baar online dupatta kharida tha — lekin jab haath mein aaya toh aankhein bhar aayi. Itna sundar aur itna asli. Chanderi ka feel hi alag hota hai, lekin yahan quality aur bhi upar thi.</div>
-      <div class="cust-person">
-        <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=150&h=150&fit=crop&crop=face&q=80" style="width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--gold)">
-        <div><div class="cust-name">Zara Fatima</div><div class="cust-loc">Lucknow, U.P.</div></div>
-      </div>
-    </div>
-    <!-- Card 2 -->
-    <div class="cust-card">
-      <div class="cust-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <div class="cust-quote">My sister's wedding would have been incomplete without this dupatta. Every guest asked where it was from. Adeena Handloom is not just a brand — it is an emotion woven into every thread.</div>
-      <div class="cust-person">
-        <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=150&h=150&fit=crop&crop=face&q=80" style="width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--gold)">
-        <div><div class="cust-name">Priya Sharma</div><div class="cust-loc">Kanpur, U.P.</div></div>
-      </div>
-    </div>
-    <!-- Card 3 -->
-    <div class="cust-card">
-      <div class="cust-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <div class="cust-quote">Ye shawl mujhe winters mein bhi ek khaas jazbaat deta hai. Handmade cheezein kuch alag hi hoti hain — jaise koi ek insaan ne apna waqt aur dil laga ke banaya ho sirf mere liye.</div>
-      <div class="cust-person">
-        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face&q=80" style="width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--gold)">
-        <div><div class="cust-name">Ayesha Siddiqui</div><div class="cust-loc">Barabanki, U.P.</div></div>
-      </div>
-    </div>
-    <!-- Card 4 -->
-    <div class="cust-card">
-      <div class="cust-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <div class="cust-quote">Ordered three stoles as gifts for my colleagues visiting from abroad. They were absolutely stunned. Said it was the most thoughtful Indian gift they had ever received. Will keep coming back!</div>
-      <div class="cust-person">
-        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150&h=150&fit=crop&crop=face&q=80" style="width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--gold)">
-        <div><div class="cust-name">Ritu Agarwal</div><div class="cust-loc">Delhi</div></div>
-      </div>
-    </div>
-    <!-- Card 5 -->
-    <div class="cust-card">
-      <div class="cust-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <div class="cust-quote">Ek baar touch karo toh samajh aata hai ki craft ka matlab kya hota hai. Jab maine yeh stole pehna toh dost ne socha koi designer piece hai. Main toh sirf muskura di aur bola — Adeena Handloom!</div>
-      <div class="cust-person">
-        <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=150&h=150&fit=crop&crop=face&q=80" style="width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--gold)">
-        <div><div class="cust-name">Nazia Khan</div><div class="cust-loc">Faizabad, U.P.</div></div>
-      </div>
-    </div>
-    <!-- Card 6 -->
-    <div class="cust-card">
-      <div class="cust-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <div class="cust-quote">The packaging was so beautiful I almost did not want to open it. And the dupatta inside? Even more gorgeous than the photos. Fast delivery, wonderful quality. Truly a gem from Barabanki.</div>
-      <div class="cust-person">
-        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&h=150&fit=crop&crop=face&q=80" style="width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--gold)">
-        <div><div class="cust-name">Sana Mirza</div><div class="cust-loc">Hyderabad</div></div>
-      </div>
-    </div>
-  </div>
+  <div class="cust-grid" id="custGrid"></div>
+</div>
 
   <!-- STATS BAND -->
   <div class="stats-band">
@@ -960,9 +960,9 @@ body.admin-mode.edit-active .img-edit-pencil{display:flex}
   <div>
     <div class="ed-label">Our Story</div>
     <h2 class="ed-h2 draggable-el" data-el-id="story-title">Rooted in <em>Barabanki Craft</em></h2>
-    <p class="ed-body">Adeena Handloom is a manufacturer of premium stoles and dupattas based in Barabanki, Uttar Pradesh &mdash; a region with a long-standing handloom tradition. Our work is carried out by skilled local artisans using time-tested weaving and dyeing techniques.</p>
-    <p class="ed-body">Every batch goes through strict quality control before dispatch, and we produce in small batches to maintain consistency across wholesale and boutique orders. We supply to retailers, boutiques and individual buyers across India, with custom branding available for bulk orders.</p>
-    <div class="ed-sig">&mdash; Adeena Handloom, Barabanki</div>
+    <p class="ed-body draggable-el" data-el-id="story-p1">Adeena Handloom is a manufacturer of premium stoles and dupattas based in Barabanki, Uttar Pradesh &mdash; a region with a long-standing handloom tradition. Our work is carried out by skilled local artisans using time-tested weaving and dyeing techniques.</p>
+    <p class="ed-body draggable-el" data-el-id="story-p2">Every batch goes through strict quality control before dispatch, and we produce in small batches to maintain consistency across wholesale and boutique orders. We supply to retailers, boutiques and individual buyers across India, with custom branding available for bulk orders.</p>
+    <div class="ed-sig draggable-el" data-el-id="story-sig">&mdash; Adeena Handloom, Barabanki</div>
   </div>
   <div class="ed-img-grid" id="edImgGrid"></div>
 </section>
@@ -975,9 +975,9 @@ body.admin-mode.edit-active .img-edit-pencil{display:flex}
     <img src="https://res.cloudinary.com/ahbbk/image/upload/adeena_handloom/indigo_shibori_stole.jpg" id="showcaseImg1" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
     <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(26,15,15,.7) 0%,transparent 50%)"></div>
     <div style="position:absolute;bottom:32px;left:32px;color:white">
-      <div style="font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold2);margin-bottom:8px">Handcrafted</div>
-      <div style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:400;line-height:1.2">Indigo Shibori<br><em style="font-style:italic;color:var(--gold2)">Stole</em></div>
-      <div style="font-size:.75rem;color:rgba(255,255,255,.6);margin-top:8px;letter-spacing:.05em">&#8377;1,200 &mdash; Available</div>
+      <div style="font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold2);margin-bottom:8px"><span class="draggable-el" data-el-id="showcase1-tag" style="display:inline-block">Handcrafted</span></div>
+      <div class="draggable-el" data-el-id="showcase1-title" style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:400;line-height:1.2">Indigo Shibori<br><em style="font-style:italic;color:var(--gold2)">Stole</em></div>
+      <div class="draggable-el" data-el-id="showcase1-price" style="font-size:.75rem;color:rgba(255,255,255,.6);margin-top:8px;letter-spacing:.05em">&#8377;1,200 &mdash; Available</div>
     </div>
   </div>
   <div style="position:relative;overflow:hidden;aspect-ratio:4/5;background:var(--smoke)">
@@ -1022,6 +1022,15 @@ body.admin-mode.edit-active .img-edit-pencil{display:flex}
     <button class="fb-btn" id="fbPrev" onclick="fbPrev()" disabled>&#8249;</button>
     <span class="fb-counter" id="fbCounter">Page 1 of 1</span>
     <button class="fb-btn" id="fbNext" onclick="fbNext()">&#8250;</button>
+  </div>
+  <div class="lb-theme-selector">
+    <span>Page Style:</span>
+    <div class="lb-theme-swatch active" data-lbt="ivory" style="background:#FBF6F0" onclick="applyLbTheme('ivory',this)" title="Ivory"></div>
+    <div class="lb-theme-swatch" data-lbt="rose" style="background:#FDF0F2" onclick="applyLbTheme('rose',this)" title="Rose"></div>
+    <div class="lb-theme-swatch" data-lbt="silk" style="background:linear-gradient(135deg,#f5e6e0,#ede0c8)" onclick="applyLbTheme('silk',this)" title="Silk"></div>
+    <div class="lb-theme-swatch" data-lbt="texture" style="background:#f5e6e0;border:1px dashed var(--gold)" onclick="applyLbTheme('texture',this)" title="Texture"></div>
+    <div class="lb-theme-swatch" data-lbt="dark" style="background:#1a0f0f" onclick="applyLbTheme('dark',this)" title="Dark"></div>
+    <div class="lb-theme-swatch" data-lbt="gold" style="background:linear-gradient(135deg,#2d1e0f,#1a0f0f)" onclick="applyLbTheme('gold',this)" title="Gold Dark"></div>
   </div>
 </section>
 <section class="catalogue" id="catalogue">
@@ -1447,6 +1456,48 @@ body.admin-mode.edit-active .img-edit-pencil{display:flex}
   </div>
 </div>
 
+
+<!-- CUSTOMER EDIT MODAL -->
+<div class="al-overlay" id="custEditModal" onclick="if(event.target===this)closeCustEdit()">
+  <div class="al-box" style="max-width:500px">
+    <h2 style="font-size:1.4rem;margin-bottom:20px">Edit Customer Review</h2>
+    <input type="hidden" id="ceIdx">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div>
+        <label class="al-label">Customer Name *</label>
+        <input type="text" class="al-input" id="ceName" placeholder="e.g. Ayesha Khan">
+      </div>
+      <div>
+        <label class="al-label">Location</label>
+        <input type="text" class="al-input" id="ceLoc" placeholder="e.g. Lucknow, U.P.">
+      </div>
+    </div>
+    <div style="margin-top:14px">
+      <label class="al-label">Review / Quote *</label>
+      <textarea class="al-input" id="ceQuote" rows="4" style="padding:12px;resize:vertical;min-height:100px" placeholder="Customer ka review..."></textarea>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr auto;gap:12px;margin-top:14px;align-items:end">
+      <div>
+        <label class="al-label">Photo URL (optional)</label>
+        <input type="text" class="al-input" id="ceImg" placeholder="https://... ya Cloudinary URL">
+      </div>
+      <div>
+        <label class="al-label">Rating</label>
+        <select class="al-input" id="ceRating" style="padding:10px 12px">
+          <option value="5">&#9733;&#9733;&#9733;&#9733;&#9733;</option>
+          <option value="4">&#9733;&#9733;&#9733;&#9733;</option>
+          <option value="3">&#9733;&#9733;&#9733;</option>
+        </select>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:20px">
+      <button class="al-btn" style="margin-top:0;flex:1" onclick="saveCustEdit()"><span>Save &#8594;</span></button>
+      <button onclick="deleteCust(parseInt(document.getElementById('ceIdx').value))" style="flex:0 0 auto;padding:14px 16px;background:#c0392b;color:white;border:none;font-family:var(--ff-body);font-size:.72rem;cursor:pointer" id="ceDelBtn">Delete</button>
+      <button onclick="closeCustEdit()" style="flex:0 0 auto;padding:14px 16px;background:none;border:1px solid var(--petal);color:var(--dust);font-family:var(--ff-body);font-size:.72rem;cursor:pointer">Cancel</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -1613,19 +1664,77 @@ function doLogout(){
   document.getElementById('panelOv').classList.remove('open');
   document.body.classList.remove('admin-mode');
   exitEditMode();
-  document.getElementById('editModeBar').classList.remove('active');
+  document.getElementById('editModeBar').style.display='none';
+  var badge=document.getElementById('f9Badge'); if(badge) badge.textContent='F9: Edit OFF';
   renderCatalogue();
 }
 
 function renderATable(){
-  document.getElementById('aTbody').innerHTML=products.map(p=>`<tr>
-    <td><div class="tstrip">${p.images&&p.images.length?p.images.slice(0,3).map(u=>`<img src="${u}" class="tprev" alt="">`).join('')+(p.images.length>3?`<span class="tmore">+${p.images.length-3}</span>`:''):'<div class="tempty">&#129523;</div>'}</div></td>
-    <td><strong>${p.name}</strong></td>
-    <td style="text-transform:capitalize;color:#7a5c5c">${p.category}</td>
-    <td>&#8377;${p.price.toLocaleString('en-IN')}</td>
-    <td><label class="tsw"><input type="checkbox" ${p.available?'checked':''} onchange="togAvail(${p.id},this.checked)"><span class="tslid"></span></label></td>
-    <td><button class="abtn" onclick="openEdit(${p.id})">Edit</button><button class="abtn del" onclick="delItem(${p.id})">Delete</button></td>
-  </tr>`).join('');
+  var rows = products.map(function(p){
+    var imgCell = '';
+    if(p.images && p.images.length){
+      var thumbs = p.images.slice(0,3).map(function(u){
+        return '<div style="position:relative;display:inline-block;margin-right:3px">' +
+          '<img src="'+u+'" class="tprev" alt="">' +
+        '</div>';
+      }).join('');
+      var more = p.images.length>3 ? '<span class="tmore">+' + (p.images.length-3) + '</span>' : '';
+      var urls = p.images.map(function(u,i){
+        var short = u.split('/').pop().substring(0,28);
+        return '<div style="display:flex;align-items:center;gap:4px;margin-top:2px">' +
+          '<span style="font-size:.58rem;color:var(--dust);max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="'+u+'">'+short+'</span>' +
+          '<button class="abtn" data-copy-url="'+encodeURIComponent(u)+'" style="padding:1px 6px;font-size:.55rem">Copy</button>' +
+          '<button class="abtn" data-edit-pid="'+p.id+'" data-edit-idx="'+i+'" style="padding:1px 6px;font-size:.55rem">Edit</button>' +
+        '</div>';
+      }).join('');
+      imgCell = '<div class="tstrip">' + thumbs + more + '</div>' + urls;
+    } else {
+      imgCell = '<div class="tempty" style="cursor:pointer" onclick="openEdit('+p.id+')" title="Add images">&#128247; Add</div>';
+    }
+    return '<tr>' +
+      '<td style="min-width:180px">'+imgCell+'</td>' +
+      '<td><strong>'+p.name+'</strong></td>' +
+      '<td style="text-transform:capitalize;color:#7a5c5c">'+p.category+'</td>' +
+      '<td>&#8377;'+p.price.toLocaleString('en-IN')+'</td>' +
+      '<td><label class="tsw"><input type="checkbox" '+(p.available?'checked':'')+' onchange="togAvail('+p.id+',this.checked)"><span class="tslid"></span></label></td>' +
+      '<td><button class="abtn" onclick="openEdit('+p.id+')">Edit</button><button class="abtn del" onclick="delItem('+p.id+')">Delete</button></td>' +
+    '</tr>';
+  }).join('');
+  document.getElementById('aTbody').innerHTML = rows;
+
+  // Wire copy/edit buttons via event delegation (avoids quote clashes)
+  document.getElementById('aTbody').onclick = function(e){
+    var copyBtn = e.target.closest('[data-copy-url]');
+    if(copyBtn){ copyUrl(decodeURIComponent(copyBtn.dataset.copyUrl)); return; }
+    var editBtn = e.target.closest('[data-edit-pid]');
+    if(editBtn){ editImgUrl(parseInt(editBtn.dataset.editPid), parseInt(editBtn.dataset.editIdx)); return; }
+  };
+}
+
+function copyUrl(url){
+  navigator.clipboard.writeText(url).then(function(){
+    toast('URL copied ✓');
+  }).catch(function(){
+    var ta = document.createElement('textarea');
+    ta.value = url; document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta);
+    toast('URL copied ✓');
+  });
+}
+
+async function editImgUrl(productId, imgIndex){
+  var p = products.find(function(x){return x.id===productId;});
+  if(!p) return;
+  var cur = p.images[imgIndex] || '';
+  var url = prompt('Image URL edit karein:', cur);
+  if(url===null) return;
+  url = url.trim();
+  if(url){ p.images[imgIndex]=url; } else { p.images.splice(imgIndex,1); }
+  try{
+    await upsertProduct(p);
+    renderATable(); renderCatalogue(); renderRibbon(); renderFeaturedCollections();
+    toast('Image URL updated ✓');
+  }catch(e){ toast('Error saving'); }
 }
 
 async function togAvail(id,v){
@@ -1759,7 +1868,17 @@ document.addEventListener('keydown',function(e){
   if(e.key==='F9'){
     e.preventDefault();
     if(document.body.classList.contains('admin-mode')){
-      toggleEditMode();
+      var bar = document.getElementById('editModeBar');
+      var badge = document.getElementById('f9Badge');
+      if(bar.style.display==='none'||bar.style.display===''){
+        bar.style.display='flex';
+        if(badge) badge.textContent='F9: Bar ON';
+      } else {
+        bar.style.display='none';
+        if(badge) badge.textContent='F9: Bar OFF';
+        // Also disable edit mode when bar hidden
+        if(editModeOn){ toggleEditMode(); }
+      }
     }
   }
   var lb = document.getElementById('lightbox');
@@ -2204,7 +2323,8 @@ async function doLogin() {
     document.getElementById('panelOv').classList.add('open');
     document.body.classList.add('admin-mode');
     renderCatalogue();
-    document.getElementById('editModeBar').classList.add('active');
+    document.getElementById('editModeBar').style.display='flex';
+    var badge=document.getElementById('f9Badge'); if(badge) badge.textContent='F9: Bar ON';
   } else {
     document.getElementById('alErr').style.display = 'block';
     document.getElementById('alPass').value = '';
@@ -2987,6 +3107,106 @@ async function loadShowcaseImages(){
   if(img2){ var u2=await getSetting('showcase_showcaseImg2',''); if(u2) img2.src=u2; }
 }
 
+
+// ===== HAPPY CUSTOMERS =====
+var defaultCustomers = [
+  {name:'Zara Fatima',loc:'Lucknow, U.P.',quote:'Maine pehli baar online dupatta kharida tha — lekin jab haath mein aaya toh aankhein bhar aayi. Itna sundar aur itna asli. Chanderi ka feel hi alag hota hai, lekin yahan quality aur bhi upar thi.',img:'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=150&h=150&fit=crop&crop=face&q=80',rating:5},
+  {name:'Priya Sharma',loc:'Kanpur, U.P.',quote:"My sister's wedding would have been incomplete without this dupatta. Every guest asked where it was from. Adeena Handloom is not just a brand — it is an emotion woven into every thread.",img:'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=150&h=150&fit=crop&crop=face&q=80',rating:5},
+  {name:'Ayesha Siddiqui',loc:'Barabanki, U.P.',quote:'Ye shawl mujhe winters mein bhi ek khaas jazbaat deta hai. Handmade cheezein kuch alag hi hoti hain — jaise koi ek insaan ne apna waqt aur dil laga ke banaya ho sirf mere liye.',img:'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face&q=80',rating:5},
+  {name:'Ritu Agarwal',loc:'Delhi',quote:'Ordered three stoles as gifts for my colleagues visiting from abroad. They were absolutely stunned. Said it was the most thoughtful Indian gift they had ever received. Will keep coming back!',img:'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150&h=150&fit=crop&crop=face&q=80',rating:5},
+  {name:'Nazia Khan',loc:'Faizabad, U.P.',quote:'Ek baar touch karo toh samajh aata hai ki craft ka matlab kya hota hai. Jab maine yeh stole pehna toh dost ne socha koi designer piece hai. Main toh sirf muskura di aur bola — Adeena Handloom!',img:'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=150&h=150&fit=crop&crop=face&q=80',rating:5},
+  {name:'Sana Mirza',loc:'Hyderabad',quote:'The packaging was so beautiful I almost did not want to open it. And the dupatta inside? Even more gorgeous than the photos. Fast delivery, wonderful quality. Truly a gem from Barabanki.',img:'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&h=150&fit=crop&crop=face&q=80',rating:5}
+];
+var customers = [];
+
+async function loadCustomers(){
+  var raw = await getSetting('customers_data','');
+  if(raw){ try{ customers=JSON.parse(raw); }catch(e){ customers=[...defaultCustomers]; } }
+  else { customers=[...defaultCustomers]; }
+  renderCustomers();
+}
+
+function renderCustomers(){
+  var grid = document.getElementById('custGrid');
+  if(!grid) return;
+  grid.innerHTML = customers.map(function(c,i){
+    var stars = '&#9733;'.repeat(c.rating||5);
+    return '<div class="cust-card">' +
+      '<button class="cust-edit-btn" onclick="openCustEdit('+i+')" title="Edit this review">&#9998;</button>' +
+      '<div class="cust-stars">'+stars+'</div>' +
+      '<div class="cust-quote">'+c.quote+'</div>' +
+      '<div class="cust-person">' +
+        '<img src="'+c.img+'" style="width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--gold)" onerror="this.style.display=&quot;none&quot;">' +
+        '<div><div class="cust-name">'+c.name+'</div><div class="cust-loc">'+c.loc+'</div></div>' +
+      '</div>' +
+    '</div>';
+  }).join('') +
+  '<button onclick="openCustEdit(-1)" class="cust-add-btn">+ Add New Customer Review</button>';
+}
+
+function openCustEdit(idx){
+  var c = idx>=0 ? customers[idx] : {name:'',loc:'',quote:'',img:'',rating:5};
+  document.getElementById('ceIdx').value = idx;
+  document.getElementById('ceName').value = c.name||'';
+  document.getElementById('ceLoc').value = c.loc||'';
+  document.getElementById('ceQuote').value = c.quote||'';
+  document.getElementById('ceImg').value = c.img||'';
+  document.getElementById('ceRating').value = c.rating||5;
+  document.getElementById('custEditModal').classList.add('open');
+}
+
+async function saveCustEdit(){
+  var idx = parseInt(document.getElementById('ceIdx').value);
+  var updated = {
+    name: document.getElementById('ceName').value.trim(),
+    loc: document.getElementById('ceLoc').value.trim(),
+    quote: document.getElementById('ceQuote').value.trim(),
+    img: document.getElementById('ceImg').value.trim(),
+    rating: parseInt(document.getElementById('ceRating').value)||5
+  };
+  if(!updated.name||!updated.quote){toast('Name aur review required hai');return;}
+  if(idx>=0){ customers[idx]=updated; } else { customers.push(updated); }
+  await setSetting('customers_data', JSON.stringify(customers));
+  renderCustomers();
+  closeCustEdit();
+  toast('Customer updated ✓');
+}
+
+async function deleteCust(idx){
+  if(!confirm('Delete this customer review?')) return;
+  customers.splice(idx,1);
+  await setSetting('customers_data', JSON.stringify(customers));
+  renderCustomers(); closeCustEdit(); toast('Deleted');
+}
+
+function closeCustEdit(){ document.getElementById('custEditModal').classList.remove('open'); }
+
+
+// ===== HERO BG MODE =====
+var heroBgMode = 'split';
+async function loadHeroBg(){
+  heroBgMode = await getSetting('hero_bg_mode','split');
+  applyHeroBg(heroBgMode, true);
+}
+function applyHeroBg(mode, silent){
+  heroBgMode = mode;
+  var hero = document.querySelector('.hero');
+  if(!hero) return;
+  if(mode==='full'){
+    hero.classList.add('hero-fullbg');
+    var btn = document.getElementById('heroBgBtn');
+    if(btn) btn.textContent='Hero: Full BG';
+  } else {
+    hero.classList.remove('hero-fullbg');
+    var btn = document.getElementById('heroBgBtn');
+    if(btn) btn.textContent='Hero: Split';
+  }
+  if(!silent) setSetting('hero_bg_mode', mode).then(function(){ toast('Hero layout updated ✓'); });
+}
+function toggleHeroBg(){
+  applyHeroBg(heroBgMode==='split' ? 'full' : 'split');
+}
+
 // ===== THEMES =====
 async function applyTheme(name, el) {
   document.documentElement.setAttribute('data-theme', name);
@@ -3100,6 +3320,9 @@ async function initApp(){
   await loadElementStyles();
   await loadCropSettings();
   await loadShowcaseImages();
+  await loadLbTheme();
+  await loadCustomers();
+  await loadHeroBg();
   await loadCustomElements();
   attachDragHandlers();
   addLazyToImages();
