@@ -567,8 +567,7 @@ select.rf-input{cursor:pointer}
 
 /* ===== DRAG-DROP EDIT MODE ===== */
 .edit-mode-bar{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:2000;background:var(--ink);color:var(--cream);padding:10px 24px;border-radius:30px;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;display:none;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.3);max-width:90vw}
-.f9-badge{position:fixed;right:16px;bottom:80px;z-index:1999;background:rgba(26,15,15,.85);color:var(--gold);padding:6px 14px;border-radius:20px;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;display:none;backdrop-filter:blur(4px);border:1px solid rgba(184,137,90,.3)}
-body.admin-mode .f9-badge{display:block}
+
 .edit-mode-bar.active{display:flex}
 .edit-mode-bar button{background:var(--gold);color:white;border:none;padding:6px 16px;border-radius:20px;font-size:.65rem;font-family:var(--ff-body);cursor:pointer;letter-spacing:.1em}
 .edit-mode-bar button.reset{background:#c0392b}
@@ -676,8 +675,10 @@ body.admin-mode .edit-mode-bar{display:flex !important}
 .hero,.editorial,.catalogue,.review-section,.customers,.flipbook-section,.journey-section,.featured-collections,.wholesale-section{position:relative}
 
 /* SITE IMAGE EDIT PENCIL */
-.img-edit-pencil{position:absolute;top:8px;left:8px;background:rgba(26,15,15,.85);color:white;border:none;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:.85rem;z-index:20;display:none;align-items:center;justify-content:center}
-body.admin-mode.edit-active .img-edit-pencil{display:flex}
+.img-edit-pencil{position:absolute;top:8px;left:8px;background:rgba(26,15,15,.85);color:white;border:none;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:.85rem;z-index:20;display:none !important;align-items:center;justify-content:center}
+body.admin-mode.edit-active .img-edit-pencil{display:flex !important}
+.logo-edit-pencil{position:static !important;display:none !important}
+body.admin-mode.edit-active .logo-edit-pencil{display:flex !important}
 .site-img-wrap{position:relative}
 
 /* BOUNCING LOGO */
@@ -777,6 +778,30 @@ body.admin-mode .cust-edit-btn{display:flex}
 
 .hero-stats .stat-n{font-family:var(--ff-display);font-size:1.8rem;font-weight:400;color:var(--ink)}
 .hero-stats .stat-l{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--dust);margin-top:3px}
+
+.section-bg-btn{position:absolute;top:12px;left:12px;z-index:10;background:rgba(26,15,15,.8);color:white;border:none;padding:6px 14px;border-radius:20px;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;display:none;align-items:center;gap:6px}
+body.admin-mode.edit-active .section-bg-btn{display:flex}
+
+/* WHOLESALERS CATALOGUE SECTION */
+.wcat-section{padding:70px 100px;background:var(--white)}
+.wcat-header{text-align:center;margin-bottom:48px}
+.wcat-h2{font-family:var(--ff-display);font-size:2.4rem;font-weight:400;color:var(--ink)}
+.wcat-h2 em{font-style:italic;color:var(--gold2)}
+.wcat-sub{font-size:.85rem;color:var(--dust);margin-top:8px;line-height:1.7}
+.wcat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
+.wcat-card{background:var(--cream);border:1px solid rgba(184,137,90,.15);padding:28px;position:relative;transition:all .3s;border-radius:4px}
+.wcat-card:hover{border-color:var(--gold);box-shadow:0 8px 24px rgba(184,137,90,.1)}
+.wcat-icon{font-size:2.4rem;margin-bottom:14px}
+.wcat-title{font-family:var(--ff-display);font-size:1.2rem;font-weight:400;color:var(--ink);margin-bottom:8px}
+.wcat-desc{font-size:.8rem;color:var(--dust);line-height:1.7;margin-bottom:16px}
+.wcat-download{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:var(--cream);padding:10px 20px;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;font-family:var(--ff-body);text-decoration:none;transition:background .3s;border:none;cursor:pointer}
+.wcat-download:hover{background:var(--gold)}
+.wcat-upload-btn{background:none;border:1px dashed var(--petal);color:var(--dust);padding:10px 20px;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;font-family:var(--ff-body);cursor:pointer;transition:all .3s;margin-top:8px;display:none}
+body.admin-mode .wcat-upload-btn{display:inline-block}
+.wcat-upload-btn:hover{border-color:var(--gold);color:var(--gold)}
+.wcat-empty{grid-column:1/-1;text-align:center;padding:60px;color:var(--dust)}
+.wcat-empty p{font-family:var(--ff-display);font-size:1.4rem;color:var(--petal);margin-bottom:8px}
+@media(max-width:900px){.wcat-section{padding:50px 24px}.wcat-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -843,7 +868,6 @@ body.admin-mode .cust-edit-btn{display:flex}
     <option value="'Jost',sans-serif">Jost</option>
   </select>
 </div>
-<div class="f9-badge" id="f9Badge">F9: Edit OFF</div>
 
 <div class="loader" id="loader">
   <div class="loader-text"><span>Adeena</span></div>
@@ -860,6 +884,7 @@ body.admin-mode .cust-edit-btn{display:flex}
     <a href="#catalogue">Collection</a>
     <a href="#lookbook">Lookbook</a>
     <a href="#wholesale">Wholesale</a>
+    <a href="#catalogues">Catalogues</a>
     <a href="#reviews">Reviews</a>
     <a href="#about">Our Story</a>
     <a href="https://wa.me/917905282816?text=Hello%20Adeena%20Handloom%2C%20I%20would%20like%20to%20enquire%20about%20your%20products." target="_blank">WhatsApp</a>
@@ -879,7 +904,8 @@ body.admin-mode .cust-edit-btn{display:flex}
     </div>
   </div>
   <div class="hero-right">
-    <img src="https://res.cloudinary.com/ahbbk/image/upload/adeena_handloom/indigo_shibori_stole.jpg" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.92) saturate(1.1)">
+    <img src="https://res.cloudinary.com/ahbbk/image/upload/adeena_handloom/indigo_shibori_stole.jpg" id="heroRightImg" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.92) saturate(1.1)" onerror="this.style.opacity='0.08'">
+    <button class="img-edit-pencil" style="top:12px;right:12px;left:auto;display:flex" onclick="editHeroRightImg()" title="Change hero image">&#9998;</button>
     <div class="hero-right-overlay"></div>
     <div class="hero-stats draggable-el" data-el-id="hero-stats">
       <div class="stat"><div class="stat-n">500+</div><div class="stat-l">Pieces Crafted</div></div>
@@ -900,7 +926,7 @@ body.admin-mode .cust-edit-btn{display:flex}
 </section>
 
 <!-- MANUFACTURING JOURNEY -->
-<section class="journey-section">
+<section class="journey-section" id="sec-journey">
   <div class="journey-header">
     <div class="ed-label draggable-el" data-el-id="journey-label" style="justify-content:center">&#10022; Our Process</div>
     <h2 class="journey-h2">From Thread to <em>Tradition</em></h2>
@@ -926,7 +952,7 @@ body.admin-mode .cust-edit-btn{display:flex}
 </section>
 
 <!-- FEATURED COLLECTIONS -->
-<section class="featured-collections">
+<section class="featured-collections" id="sec-featured">
   <div class="ed-label" style="justify-content:center">&#10022; Shop By Category</div>
   <h2 class="journey-h2" style="text-align:center;margin-bottom:48px">Featured <em>Collections</em></h2>
   <div class="fc-grid" id="fcGrid"></div>
@@ -941,7 +967,7 @@ body.admin-mode .cust-edit-btn{display:flex}
 <div class="floaters" id="floaters"></div>
 
 <!-- CUSTOMERS SECTION -->
-<section class="customers">
+<section class="customers" id="sec-customers">
   <div class="cust-eyebrow">Happy Customers</div>
   <h2 class="cust-h2 draggable-el" data-el-id="customers-title">They Wore It.<br>They <em>Loved It.</em></h2>
 
@@ -993,7 +1019,7 @@ body.admin-mode .cust-edit-btn{display:flex}
 </section>
 
 <!-- FLIPBOOK LOOKBOOK -->
-<section class="flipbook-section" id="lookbook">
+<section class="flipbook-section" id="sec-lookbook" id="lookbook">
   <div class="fb-header">
     <div class="fb-eyebrow">&#10022; Lookbook 2025</div>
     <h2 class="fb-h2 draggable-el" data-el-id="lookbook-title">Our <em>Collection Album</em></h2>
@@ -1050,7 +1076,7 @@ body.admin-mode .cust-edit-btn{display:flex}
 </section>
 
 
-<section class="review-section" id="reviews">
+<section class="review-section" id="sec-reviews" id="reviews">
   <div class="review-header">
     <div>
       <div style="font-size:.62rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:flex;align-items:center;gap:14px">
@@ -1112,7 +1138,7 @@ body.admin-mode .cust-edit-btn{display:flex}
 </div>
 
 
-<section class="wholesale-section" id="wholesale">
+<section class="wholesale-section" id="wholesale" data-sec-id="sec-wholesale">
   <div class="wholesale-inner">
     <div class="ed-label" style="justify-content:center;color:var(--gold2)">&#10022; For Businesses</div>
     <h2 class="wholesale-h2">Wholesale &amp; <em>Boutique Supply</em></h2>
@@ -1150,6 +1176,50 @@ body.admin-mode .cust-edit-btn{display:flex}
     </a>
   </div>
 </section>
+
+
+<!-- WHOLESALERS CATALOGUE SECTION -->
+<section class="wcat-section" id="catalogues">
+  <div class="wcat-header">
+    <div class="ed-label" style="justify-content:center;margin-bottom:12px">&#10022; For Trade Partners</div>
+    <h2 class="wcat-h2">Download Our <em>Catalogues</em></h2>
+    <p class="wcat-sub">Price lists, product catalogues, and wholesale terms — download directly or request via WhatsApp</p>
+  </div>
+  <div class="wcat-grid" id="wcatGrid"></div>
+  <div style="text-align:center;margin-top:32px">
+    <button class="wcat-upload-btn" onclick="openPdfUpload()">+ Upload New Catalogue (PDF)</button>
+  </div>
+</section>
+
+<!-- PDF UPLOAD MODAL -->
+<div class="al-overlay" id="pdfUploadModal" onclick="if(event.target===this)closePdfUpload()">
+  <div class="al-box" style="max-width:480px">
+    <h2 style="font-size:1.4rem;margin-bottom:20px">Upload Catalogue PDF</h2>
+    <div class="ef" style="margin-bottom:16px">
+      <label class="al-label">Title</label>
+      <input type="text" class="al-input" id="pdfTitle" placeholder="e.g. Stoles Price List 2025">
+    </div>
+    <div class="ef" style="margin-bottom:16px">
+      <label class="al-label">Description</label>
+      <input type="text" class="al-input" id="pdfDesc" placeholder="e.g. Wholesale pricing for stoles collection">
+    </div>
+    <div class="ef" style="margin-bottom:16px">
+      <label class="al-label">PDF File URL (Cloudinary ya Google Drive direct link)</label>
+      <input type="text" class="al-input" id="pdfUrl" placeholder="https://res.cloudinary.com/... ya drive.google.com/...">
+    </div>
+    <div style="background:rgba(184,137,90,.06);border-left:2px solid var(--gold);padding:12px;margin-bottom:16px;font-size:.75rem;color:var(--dust);line-height:1.7">
+      <strong style="color:var(--gold)">Cloudinary pe PDF upload karne ka tarika:</strong><br>
+      1. Cloudinary Dashboard → Media Library → Upload<br>
+      2. PDF file select karo<br>
+      3. Upload ke baad "Copy URL" karo<br>
+      4. Yahan paste karo &#8595;
+    </div>
+    <div style="display:flex;gap:10px;margin-top:20px">
+      <button class="al-btn" style="margin-top:0;flex:1" onclick="savePdfCatalogue()"><span>Save Catalogue &#8594;</span></button>
+      <button onclick="closePdfUpload()" style="flex:0 0 auto;padding:14px 16px;background:none;border:1px solid var(--petal);color:var(--dust);font-family:var(--ff-body);font-size:.72rem;cursor:pointer">Cancel</button>
+    </div>
+  </div>
+</div>
 
 <footer>
   <div class="footer-inner">
@@ -1665,7 +1735,7 @@ function doLogout(){
   document.body.classList.remove('admin-mode');
   exitEditMode();
   document.getElementById('editModeBar').style.display='none';
-  var badge=document.getElementById('f9Badge'); if(badge) badge.textContent='F9: Edit OFF';
+   if(badge) badge.textContent='F9: Edit OFF';
   renderCatalogue();
 }
 
@@ -1869,16 +1939,8 @@ document.addEventListener('keydown',function(e){
     e.preventDefault();
     if(document.body.classList.contains('admin-mode')){
       var bar = document.getElementById('editModeBar');
-      var badge = document.getElementById('f9Badge');
-      if(bar.style.display==='none'||bar.style.display===''){
-        bar.style.display='flex';
-        if(badge) badge.textContent='F9: Bar ON';
-      } else {
-        bar.style.display='none';
-        if(badge) badge.textContent='F9: Bar OFF';
-        // Also disable edit mode when bar hidden
-        if(editModeOn){ toggleEditMode(); }
-      }
+      var hidden = bar.style.display==='none'||bar.style.display==='';
+      bar.style.display = hidden ? 'flex' : 'none';
     }
   }
   var lb = document.getElementById('lightbox');
@@ -2324,7 +2386,8 @@ async function doLogin() {
     document.body.classList.add('admin-mode');
     renderCatalogue();
     document.getElementById('editModeBar').style.display='flex';
-    var badge=document.getElementById('f9Badge'); if(badge) badge.textContent='F9: Bar ON';
+    addSectionBgButtons();
+     if(badge) badge.textContent='F9: Bar ON';
   } else {
     document.getElementById('alErr').style.display = 'block';
     document.getElementById('alPass').value = '';
@@ -2705,6 +2768,7 @@ function toggleEditMode(){
   if(editModeOn){
     attachDragHandlers();
     document.getElementById('panelOv').classList.remove('open');
+    addSectionBgButtons();
   } else {
     document.getElementById('formatToolbar').classList.remove('open');
   }
@@ -2851,25 +2915,44 @@ function addRibbonSlot(){
 function renderLogo(){
   var wrap = document.querySelector('.logo-wrap');
   if(!wrap) return;
-  var existingImg = wrap.querySelector('.logo-bounce');
-  if(existingImg) existingImg.remove();
-  var existingPencil = wrap.querySelector('.img-edit-pencil');
-  if(existingPencil) existingPencil.remove();
+  // Remove old
+  ['logo-bounce','logo-edit-pencil','logo-resize-btn'].forEach(function(cls){
+    var el = wrap.querySelector('.'+cls); if(el) el.remove();
+  });
+  var savedSize = siteImages.logoSize || 48;
   if(siteImages.logo){
     var img = document.createElement('img');
-    img.src = siteImages.logo; img.className='logo-bounce'; img.alt='Adeena Handloom';
-    img.loading='lazy';
-    img.onerror=function(){ this.style.display='none'; };
+    img.src = siteImages.logo;
+    img.className = 'logo-bounce';
+    img.alt = 'Adeena Handloom';
+    img.loading = 'lazy';
+    img.style.height = savedSize + 'px';
+    img.onerror = function(){ this.style.display='none'; };
     wrap.insertBefore(img, wrap.firstChild);
   }
+  // Pencil edit button
   var pencil = document.createElement('button');
-  pencil.className='img-edit-pencil'; pencil.style.position='static'; pencil.style.display=document.body.classList.contains('admin-mode')&&editModeOn?'flex':'none';
-  pencil.title='Change logo image';
-  pencil.innerHTML='&#9998;';
-  pencil.onclick=function(){ editSiteImage('logo'); };
-  pencil.classList.add('logo-edit-pencil');
+  pencil.className = 'img-edit-pencil logo-edit-pencil';
+  pencil.style.position = 'static';
+  pencil.title = 'Change logo image';
+  pencil.innerHTML = '&#9998;';
+  pencil.onclick = function(){ editLogoFull(); };
   wrap.appendChild(pencil);
 }
+
+async function editLogoFull(){
+  var url = prompt('Logo image URL (Cloudinary):', siteImages.logo||'');
+  if(url===null) return;
+  url = url.trim();
+  var sizeStr = prompt('Logo height in px (default 48):', siteImages.logoSize||48);
+  var size = parseInt(sizeStr)||48;
+  siteImages.logo = url;
+  siteImages.logoSize = size;
+  await saveSiteImages();
+  renderLogo();
+  toast('Logo updated ✓');
+}
+
 
 // ===== HERO IMAGE (editable) =====
 function renderHeroImage(){
@@ -3182,6 +3265,118 @@ async function deleteCust(idx){
 function closeCustEdit(){ document.getElementById('custEditModal').classList.remove('open'); }
 
 
+
+
+// ===== PDF CATALOGUES =====
+var pdfCatalogues = [];
+async function loadPdfCatalogues(){
+  var raw = await getSetting('pdf_catalogues','[]');
+  try{ pdfCatalogues=JSON.parse(raw)||[]; }catch(e){ pdfCatalogues=[]; }
+  renderPdfCatalogues();
+}
+function renderPdfCatalogues(){
+  var grid = document.getElementById('wcatGrid');
+  if(!grid) return;
+  var isAdmin = document.body.classList.contains('admin-mode');
+  if(!pdfCatalogues.length){
+    grid.innerHTML = '<div class="wcat-empty"><p>No catalogues yet</p><small>Admin: Upload catalogues using the button below</small></div>';
+    return;
+  }
+  grid.innerHTML = pdfCatalogues.map(function(cat,i){
+    var icon = cat.url && cat.url.includes('.pdf') ? '&#128196;' : '&#128230;';
+    return '<div class="wcat-card">' +
+      '<div class="wcat-icon">'+icon+'</div>' +
+      '<div class="wcat-title">'+cat.title+'</div>' +
+      '<div class="wcat-desc">'+cat.desc+'</div>' +
+      '<a class="wcat-download" href="'+cat.url+'" target="_blank" download>&#8595; Download</a>' +
+      (isAdmin ? '<br><button class="wcat-upload-btn" onclick="deletePdf('+i+')" style="margin-top:8px;border-color:#e53e3e;color:#e53e3e">Delete</button>' : '') +
+    '</div>';
+  }).join('');
+}
+function openPdfUpload(){
+  document.getElementById('pdfTitle').value='';
+  document.getElementById('pdfDesc').value='';
+  document.getElementById('pdfUrl').value='';
+  document.getElementById('pdfUploadModal').classList.add('open');
+}
+function closePdfUpload(){ document.getElementById('pdfUploadModal').classList.remove('open'); }
+async function savePdfCatalogue(){
+  var title = document.getElementById('pdfTitle').value.trim();
+  var desc = document.getElementById('pdfDesc').value.trim();
+  var url = document.getElementById('pdfUrl').value.trim();
+  if(!title||!url){ toast('Title aur URL required hai'); return; }
+  pdfCatalogues.push({title:title, desc:desc, url:url, date:new Date().toLocaleDateString('en-IN')});
+  await setSetting('pdf_catalogues', JSON.stringify(pdfCatalogues));
+  renderPdfCatalogues(); closePdfUpload(); toast('Catalogue added ✓');
+}
+async function deletePdf(idx){
+  if(!confirm('Delete this catalogue?')) return;
+  pdfCatalogues.splice(idx,1);
+  await setSetting('pdf_catalogues', JSON.stringify(pdfCatalogues));
+  renderPdfCatalogues(); toast('Deleted');
+}
+
+// ===== SECTION BACKGROUNDS =====
+var sectionBgs = {};
+async function loadSectionBgs(){
+  var raw = await getSetting('section_bgs','{}');
+  try{ sectionBgs=JSON.parse(raw)||{}; }catch(e){ sectionBgs={}; }
+  applySectionBgs();
+}
+function applySectionBgs(){
+  Object.keys(sectionBgs).forEach(function(id){
+    var sec=document.getElementById(id); if(!sec) return;
+    var bg=sectionBgs[id];
+    if(bg && bg.url){
+      sec.style.cssText += ';background-image:url("'+bg.url+'");background-size:'+(bg.size||'cover')+';background-position:center;background-repeat:no-repeat;position:relative';
+      var ov=sec.querySelector('.sec-bg-overlay');
+      if(!ov){ ov=document.createElement('div'); ov.className='sec-bg-overlay'; sec.insertBefore(ov,sec.firstChild); }
+      ov.style.cssText='position:absolute;inset:0;z-index:0;pointer-events:none;background:rgba(250,245,240,'+(bg.overlay||0.75)+')';
+      Array.from(sec.children).forEach(function(c){ if(!c.classList.contains('sec-bg-overlay')&&!c.classList.contains('section-bg-btn')){ c.style.position='relative'; c.style.zIndex='1'; } });
+    } else {
+      sec.style.backgroundImage='none';
+      var ov=sec.querySelector('.sec-bg-overlay'); if(ov) ov.remove();
+    }
+  });
+}
+async function openSectionBgEditor(secId){
+  var cur=sectionBgs[secId]||{};
+  var url=prompt('Background image URL\n(Cloudinary ya koi bhi URL — khaali chhodo to hatao):', cur.url||'');
+  if(url===null) return;
+  url=url.trim();
+  if(!url){ delete sectionBgs[secId]; applySectionBgs(); await saveSectionBgs(); toast('Background removed'); return; }
+  var overlay=prompt('Overlay opacity\n0 = full image\n0.7 = light overlay (default)\n0.9 = dark overlay:', cur.overlay||'0.7');
+  var size=prompt('Image size:\ncover = fill\ncontain = fit\nauto = repeat tile:', cur.size||'cover');
+  sectionBgs[secId]={url:url, overlay:parseFloat(overlay)||0.7, size:size||'cover'};
+  await saveSectionBgs(); applySectionBgs(); toast('Background updated ✓');
+}
+async function saveSectionBgs(){ await setSetting('section_bgs',JSON.stringify(sectionBgs)); }
+function addSectionBgButtons(){
+  ['sec-journey','sec-featured','sec-customers','sec-reviews','sec-lookbook','wholesale'].forEach(function(id){
+    var sec=document.getElementById(id); if(!sec||sec.querySelector('.section-bg-btn')) return;
+    var btn=document.createElement('button');
+    btn.className='section-bg-btn'; btn.innerHTML='&#127758; BG Image';
+    btn.setAttribute('data-sec-id', id);
+    sec.insertBefore(btn, sec.firstChild);
+  });
+  document.addEventListener('click', function(e){
+    var btn=e.target.closest('.section-bg-btn');
+    if(btn) openSectionBgEditor(btn.dataset.secId);
+  });
+}
+
+// Hero right image
+function editHeroRightImg(){
+  var img=document.getElementById('heroRightImg');
+  var url=prompt('Hero image URL:', img?img.src:'');
+  if(url===null) return; url=url.trim();
+  if(url&&img){ img.src=url; img.style.opacity='1'; setSetting('hero_right_img',url).then(function(){toast('Hero image updated ✓');}); }
+}
+async function loadHeroRightImg(){
+  var url=await getSetting('hero_right_img','');
+  if(url){ var img=document.getElementById('heroRightImg'); if(img){img.src=url;img.style.opacity='1';} }
+}
+
 // ===== HERO BG MODE =====
 var heroBgMode = 'split';
 async function loadHeroBg(){
@@ -3323,6 +3518,9 @@ async function initApp(){
   await loadLbTheme();
   await loadCustomers();
   await loadHeroBg();
+  await loadSectionBgs();
+  await loadHeroRightImg();
+  await loadPdfCatalogues();
   await loadCustomElements();
   attachDragHandlers();
   addLazyToImages();
