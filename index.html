@@ -52,7 +52,7 @@ body{font-family:var(--ff-body);background:var(--cream);color:var(--ink);cursor:
 /* HEADER */
 header{position:fixed;top:0;left:0;right:0;z-index:500;padding:24px 60px;display:flex;align-items:center;justify-content:space-between;transition:all .4s ease;background:rgba(250,245,240,.97);backdrop-filter:blur(10px);border-bottom:1px solid rgba(184,137,90,.1)}
 header.scrolled{background:rgba(250,245,240,.97);backdrop-filter:blur(12px);padding:16px 60px;border-bottom:1px solid rgba(184,137,90,.15);box-shadow:0 2px 12px rgba(0,0,0,.04)}
-.logo-wrap{display:flex;flex-direction:column;gap:2px}
+.logo-wrap{display:flex;flex-direction:row;align-items:center;gap:10px;position:relative;z-index:10}
 .logo-a{font-family:var(--ff-display);font-size:1.5rem;font-weight:500;color:var(--ink);letter-spacing:.04em;line-height:1}
 .logo-b{font-size:.58rem;letter-spacing:.35em;text-transform:uppercase;color:var(--dust);font-weight:300}
 .nav-links{display:flex;gap:40px;align-items:center}
@@ -682,7 +682,7 @@ body.admin-mode.edit-active .logo-edit-pencil{display:flex !important}
 .site-img-wrap{position:relative}
 
 /* BOUNCING LOGO */
-.logo-bounce{height:48px;width:auto;display:block;animation:logoBounce 2.4s ease-in-out infinite}
+.logo-bounce{height:48px;width:auto;display:block;animation:logoBounce 2.4s ease-in-out infinite;flex-shrink:0;max-width:120px;object-fit:contain}
 @keyframes logoBounce{
   0%,100%{transform:translateY(0) scale(1)}
   25%{transform:translateY(-8px) scale(1.03)}
@@ -745,7 +745,8 @@ body.admin-mode.edit-active .logo-edit-pencil{display:flex !important}
 .fb-left.lb-theme-gold .fb-page-num,.fb-right.lb-theme-gold .fb-page-num{color:rgba(201,169,110,.5)}
 
 /* Lookbook theme selector */
-.lb-theme-selector{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:20px;flex-wrap:wrap}
+.lb-theme-selector{display:none;align-items:center;justify-content:center;gap:8px;margin-top:20px;flex-wrap:wrap}
+body.admin-mode .lb-theme-selector{display:flex}
 .lb-theme-selector span{font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--dust);margin-right:4px}
 .lb-theme-swatch{width:28px;height:28px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:all .2s;box-shadow:0 2px 6px rgba(0,0,0,.1)}
 .lb-theme-swatch.active,.lb-theme-swatch:hover{border-color:var(--gold);transform:scale(1.15)}
@@ -876,9 +877,11 @@ body.admin-mode .wcat-upload-btn{display:inline-block}
 </div>
 
 <header id="mainHeader">
-  <div class="logo-wrap draggable-el" data-el-id="logo">
-    <div class="logo-a">Adeena Handloom</div>
-    <div class="logo-b">Since Barabanki, U.P.</div>
+  <div class="logo-wrap" data-el-id="logo">
+    <div style="display:flex;flex-direction:column;gap:2px">
+      <div class="logo-a draggable-el" data-el-id="logo-text">Adeena Handloom</div>
+      <div class="logo-b">Since Barabanki, U.P.</div>
+    </div>
   </div>
   <nav class="nav-links">
     <a href="#catalogue">Collection</a>
@@ -1008,18 +1011,18 @@ body.admin-mode .wcat-upload-btn{display:inline-block}
   </div>
   <div style="position:relative;overflow:hidden;aspect-ratio:4/5;background:var(--smoke)">
     <button class="img-edit-pencil" onclick="promptImgUrl('showcaseImg2')" title="Change image">&#9998;</button>
-    <img src="https://res.cloudinary.com/ahbbk/image/upload/adeena_handloom/crimson_shibori_dupatta.jpg" id="showcaseImg2" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" onerror="this.style.opacity='.15'">
+    <img src="https://res.cloudinary.com/ahbbk/image/upload/adeena_handloom/crimson_shibori_dupatta.jpg" id="showcaseImg2" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" onerror="this.style.filter='grayscale(1) opacity(.3)'">
     <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(26,15,15,.7) 0%,transparent 50%)"></div>
     <div style="position:absolute;bottom:32px;left:32px;color:white">
-      <div style="font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold2);margin-bottom:8px">New Arrival</div>
-      <div style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:400;line-height:1.2">Crimson Shibori<br><em style="font-style:italic;color:var(--gold2)">Dupatta</em></div>
-      <div style="font-size:.75rem;color:rgba(255,255,255,.6);margin-top:8px;letter-spacing:.05em">&#8377;1,100 &mdash; Available</div>
+      <div class="draggable-el" data-el-id="showcase2-tag" style="font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold2);margin-bottom:8px">New Arrival</div>
+      <div class="draggable-el" data-el-id="showcase2-title" style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:400;line-height:1.2">Crimson Shibori<br><em style="font-style:italic;color:var(--gold2)">Dupatta</em></div>
+      <div class="draggable-el" data-el-id="showcase2-price" style="font-size:.75rem;color:rgba(255,255,255,.6);margin-top:8px;letter-spacing:.05em">&#8377;1,100 &mdash; Available</div>
     </div>
   </div>
 </section>
 
 <!-- FLIPBOOK LOOKBOOK -->
-<section class="flipbook-section" id="sec-lookbook" id="lookbook">
+<section class="flipbook-section" id="lookbook">
   <div class="fb-header">
     <div class="fb-eyebrow">&#10022; Lookbook 2025</div>
     <h2 class="fb-h2 draggable-el" data-el-id="lookbook-title">Our <em>Collection Album</em></h2>
@@ -2487,9 +2490,23 @@ async function getSetting(key, fallback){
 }
 async function setSetting(key, value){
   try{
-    await supaFetch('settings', {method:'POST', prefer:'resolution=merge-duplicates,return=minimal',
-      body:JSON.stringify({key:key, value:String(value)})});
-  }catch(e){ console.error('Setting save error', e); }
+    // Try upsert (insert with merge on conflict)
+    var r = await fetch(SUPA_URL+'/rest/v1/settings', {
+      method:'POST',
+      headers:{'apikey':SUPA_ANON,'Authorization':'Bearer '+SUPA_ANON,
+        'Content-Type':'application/json','Prefer':'resolution=merge-duplicates,return=minimal'},
+      body:JSON.stringify({key:key,value:String(value)})
+    });
+    // If upsert fails (no unique constraint), try PATCH
+    if(!r.ok){
+      await fetch(SUPA_URL+'/rest/v1/settings?key=eq.'+encodeURIComponent(key),{
+        method:'PATCH',
+        headers:{'apikey':SUPA_ANON,'Authorization':'Bearer '+SUPA_ANON,
+          'Content-Type':'application/json','Prefer':'return=minimal'},
+        body:JSON.stringify({value:String(value)})
+      });
+    }
+  }catch(e){ console.error('Setting save error',e); }
 }
 
 
